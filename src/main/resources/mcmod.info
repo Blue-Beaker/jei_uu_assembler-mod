@@ -1,15 +1,15 @@
 [
 {
   "modid": "jecustom",
-  "name": "No Gravity",
-  "description": "A mod that removes gravity for players, entities and falling blocks.",
+  "name": "Just Enough Custom",
+  "description": "JEI addon for providing custom informations.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "https://github.com/Blue-Beaker/jecustom-mod",
   "updateUrl": "",
   "authorList": ["Blue_Beaker"],
   "credits": "",
-  "logoFile": "banner.png",
+  "logoFile": "icon.png",
   "screenshots": [],
   "dependencies": []
 }
