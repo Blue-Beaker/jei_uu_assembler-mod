@@ -1,12 +1,12 @@
-package io.bluebeaker.jecustom.jei.uu;
+package io.bluebeaker.jei_uu_assembler.jei.uu;
 
 import java.util.List;
 
 import ic2.core.IC2;
 import ic2.core.block.TeBlockRegistry;
 import ic2.core.ref.TeBlock;
-import io.bluebeaker.jecustom.JecustomMod;
-import io.bluebeaker.jecustom.Utils;
+import io.bluebeaker.jei_uu_assembler.JeiUuAssemblerMod;
+import io.bluebeaker.jei_uu_assembler.Utils;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.gui.ICraftingGridHelper;
@@ -24,7 +24,7 @@ public class UURecipeCategory implements IRecipeCategory<IRecipeWrapper> {
     static IJeiHelpers jeiHelpers;
 	private static final int craftOutputSlot = 0;
 	private static final int craftInputSlot1 = 1;
-    public static final String UID = "jecustom.uuassembly";
+    public static final String UID = "jei_uu_assembler.uuassembly";
 
 	public static final int width = 116;
 	public static final int height = 54;

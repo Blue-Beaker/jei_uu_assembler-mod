@@ -1,4 +1,4 @@
-package io.bluebeaker.jecustom;
+package io.bluebeaker.jei_uu_assembler;
 
 import net.minecraft.client.resources.I18n;
 

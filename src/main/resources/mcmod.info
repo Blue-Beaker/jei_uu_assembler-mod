@@ -1,11 +1,11 @@
 [
 {
-  "modid": "jecustom",
+  "modid": "jei_uu_assembler",
   "name": "Just Enough Custom",
   "description": "JEI addon for providing custom informations.",
   "version": "${version}",
   "mcversion": "${mcversion}",
-  "url": "https://github.com/Blue-Beaker/jecustom-mod",
+  "url": "https://github.com/Blue-Beaker/jei_uu_assembler-mod",
   "updateUrl": "",
   "authorList": ["Blue_Beaker"],
   "credits": "",

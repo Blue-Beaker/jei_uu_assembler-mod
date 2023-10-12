@@ -1,7 +1,7 @@
 {
     "required": true,
     "compatibilityLevel": "JAVA_8",
-    "package": "io.bluebeaker.jecustom.mixin",
+    "package": "io.bluebeaker.jei_uu_assembler.mixin",
     "mixins": [
       "AccessorUuRecipe"
     ],
@@ -12,5 +12,5 @@
     "injectors": {
       "defaultRequire": 1
     },
-    "refmap": "mixins.jecustom.refmap.json"
+    "refmap": "mixins.jei_uu_assembler.refmap.json"
   }

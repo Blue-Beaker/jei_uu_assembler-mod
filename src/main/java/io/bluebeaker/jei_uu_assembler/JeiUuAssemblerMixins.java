@@ -1,4 +1,4 @@
-package io.bluebeaker.worldstagescompat;
+package io.bluebeaker.jei_uu_assembler;
 
 import java.util.Collections;
 import java.util.List;
@@ -10,13 +10,13 @@ import net.minecraftforge.common.ForgeVersion;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 import zone.rong.mixinbooter.ILateMixinLoader;
 
-@IFMLLoadingPlugin.Name("jecustom")
+@IFMLLoadingPlugin.Name("jei_uu_assembler")
 @IFMLLoadingPlugin.MCVersion(ForgeVersion.mcVersion)
-public class JecustomMixins implements IFMLLoadingPlugin, ILateMixinLoader {
+public class JeiUuAssemblerMixins implements IFMLLoadingPlugin, ILateMixinLoader {
 
     @Override
     public List<String> getMixinConfigs() {
-        return Collections.singletonList("mixins.jecustom.json");
+        return Collections.singletonList("mixins.jei_uu_assembler.json");
     }
 
     @Override

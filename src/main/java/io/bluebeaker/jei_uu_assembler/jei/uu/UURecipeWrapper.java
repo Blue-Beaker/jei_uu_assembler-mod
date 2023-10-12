@@ -1,4 +1,4 @@
-package io.bluebeaker.jecustom.jei.uu;
+package io.bluebeaker.jei_uu_assembler.jei.uu;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,7 +8,7 @@ import ic2.core.block.machine.tileentity.TileEntityAssemblyBench.UuRecipe;
 import ic2.core.item.type.MiscResourceType;
 import ic2.core.ref.ItemName;
 import ic2.core.util.StackUtil;
-import io.bluebeaker.jecustom.mixin.AccessorUuRecipe;
+import io.bluebeaker.jei_uu_assembler.mixin.AccessorUuRecipe;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeWrapper;

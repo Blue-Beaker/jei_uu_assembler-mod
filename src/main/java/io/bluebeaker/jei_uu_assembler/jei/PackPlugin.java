@@ -1,11 +1,11 @@
-package io.bluebeaker.jecustom.jei;
+package io.bluebeaker.jei_uu_assembler.jei;
 
 import javax.annotation.Nonnull;
 
 import ic2.core.ref.BlockName;
 import ic2.core.ref.TeBlock;
-import io.bluebeaker.jecustom.jei.uu.UURecipeCategory;
-import io.bluebeaker.jecustom.jei.uu.UURecipeMaker;
+import io.bluebeaker.jei_uu_assembler.jei.uu.UURecipeCategory;
+import io.bluebeaker.jei_uu_assembler.jei.uu.UURecipeMaker;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.IJeiRuntime;
