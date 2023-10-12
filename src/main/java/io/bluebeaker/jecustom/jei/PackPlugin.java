@@ -2,7 +2,10 @@ package io.bluebeaker.jecustom.jei;
 
 import javax.annotation.Nonnull;
 
+import ic2.core.ref.BlockName;
+import ic2.core.ref.TeBlock;
 import io.bluebeaker.jecustom.jei.uu.UURecipeCategory;
+import io.bluebeaker.jecustom.jei.uu.UURecipeMaker;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.IJeiRuntime;
@@ -18,7 +21,7 @@ import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 public class PackPlugin implements IModPlugin {
 
   private static IJeiRuntime jeiRuntime = null;
-  static IModRegistry modRegistry;
+  public static IModRegistry modRegistry;
   @Override
   public void registerItemSubtypes(ISubtypeRegistry subtypeRegistry) {
   }
@@ -27,11 +30,14 @@ public class PackPlugin implements IModPlugin {
   public void registerCategories(IRecipeCategoryRegistration registry) {
     IJeiHelpers jeiHelpers = registry.getJeiHelpers();
     IGuiHelper guiHelper = jeiHelpers.getGuiHelper();
-    registry.addRecipeCategories(new UURecipeCategory(guiHelper.createBlankDrawable(16, 16),"category.uuassemblybench"));
+    registry.addRecipeCategories(new UURecipeCategory(guiHelper));
   }
 
   @Override
   public void register(IModRegistry registry) {
+    modRegistry=registry;
+    registry.addRecipes(UURecipeMaker.getUuRecipe(), UURecipeCategory.UID);
+		registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.uu_assembly_bench), UURecipeCategory.UID);
   }
 
   @Override
