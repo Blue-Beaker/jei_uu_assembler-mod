@@ -4,6 +4,7 @@ import javax.annotation.Nonnull;
 
 import ic2.core.ref.BlockName;
 import ic2.core.ref.TeBlock;
+import io.bluebeaker.jei_uu_assembler.JeiUuAssemblerMod;
 import io.bluebeaker.jei_uu_assembler.jei.uu.UURecipeCategory;
 import io.bluebeaker.jei_uu_assembler.jei.uu.UURecipeMaker;
 import mezz.jei.api.IGuiHelper;
@@ -36,8 +37,10 @@ public class PackPlugin implements IModPlugin {
   @Override
   public void register(IModRegistry registry) {
     modRegistry=registry;
+    JeiUuAssemblerMod.logInfo("Started loading UU recipes...");
     registry.addRecipes(UURecipeMaker.getUuRecipe(), UURecipeCategory.UID);
 		registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.uu_assembly_bench), UURecipeCategory.UID);
+    JeiUuAssemblerMod.logInfo("Loaded UU recipes!");
   }
 
   @Override

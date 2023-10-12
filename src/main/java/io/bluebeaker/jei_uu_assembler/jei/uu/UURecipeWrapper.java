@@ -11,9 +11,6 @@ import io.bluebeaker.jei_uu_assembler.mixin.AccessorUuRecipe;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeWrapper;
-import mezz.jei.api.recipe.IStackHelper;
-import mezz.jei.recipes.BrokenCraftingRecipeException;
-import mezz.jei.util.ErrorUtil;
 import net.minecraft.item.ItemStack;
 
 public class UURecipeWrapper implements IRecipeWrapper {
@@ -28,16 +25,9 @@ public class UURecipeWrapper implements IRecipeWrapper {
 	@Override
 	public void getIngredients(IIngredients ingredients) {
 		ItemStack recipeOutput = recipe.getRecipeOutput();
-		IStackHelper stackHelper = jeiHelpers.getStackHelper();
-
-		try {
-			List<List<ItemStack>> inputLists = getInputLists();
-			ingredients.setInputLists(ItemStack.class, inputLists);
-			ingredients.setOutput(ItemStack.class, recipeOutput);
-		} catch (RuntimeException e) {
-			String info = ErrorUtil.getInfoFromBrokenCraftingRecipe(recipe, recipe.getIngredients(), recipeOutput);
-			throw new BrokenCraftingRecipeException(info, e);
-		}
+		List<List<ItemStack>> inputLists = getInputLists();
+		ingredients.setInputLists(ItemStack.class, inputLists);
+		ingredients.setOutput(ItemStack.class, recipeOutput);
 	}
 	private List<List<ItemStack>> getInputLists(){
       	ItemStack uu = ItemName.misc_resource.getItemStack(MiscResourceType.matter);
