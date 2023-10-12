@@ -7,7 +7,6 @@ import java.util.List;
 import ic2.core.block.machine.tileentity.TileEntityAssemblyBench.UuRecipe;
 import ic2.core.item.type.MiscResourceType;
 import ic2.core.ref.ItemName;
-import ic2.core.util.StackUtil;
 import io.bluebeaker.jei_uu_assembler.mixin.AccessorUuRecipe;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.ingredients.IIngredients;
@@ -16,7 +15,6 @@ import mezz.jei.api.recipe.IStackHelper;
 import mezz.jei.recipes.BrokenCraftingRecipeException;
 import mezz.jei.util.ErrorUtil;
 import net.minecraft.item.ItemStack;
-import scala.Array;
 
 public class UURecipeWrapper implements IRecipeWrapper {
 	private final IJeiHelpers jeiHelpers;
