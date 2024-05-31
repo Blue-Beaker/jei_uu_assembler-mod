@@ -11,6 +11,6 @@
   "credits": "",
   "logoFile": "icon.png",
   "screenshots": [],
-  "dependencies": ["jei>=4.7.11.102","ic2>=2.8.222-ex112"]
+  "dependencies": ["jei>=4.7.11.102","ic2>=2.8.222-ex112","mixinbooter>=7.1"]
 }
 ]
