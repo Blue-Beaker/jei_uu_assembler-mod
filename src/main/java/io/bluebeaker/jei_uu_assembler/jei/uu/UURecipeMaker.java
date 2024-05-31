@@ -5,7 +5,7 @@ import java.util.List;
 
 import ic2.core.block.machine.tileentity.TileEntityAssemblyBench;
 import ic2.core.block.machine.tileentity.TileEntityAssemblyBench.UuRecipe;
-import io.bluebeaker.jei_uu_assembler.jei.PackPlugin;
+import io.bluebeaker.jei_uu_assembler.jei.UuAssemblerPlugin;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.item.crafting.IRecipe;
 
@@ -17,7 +17,7 @@ public class UURecipeMaker {
 		List<IRecipeWrapper> recipes = new ArrayList<>();
 		for (IRecipe recipe : TileEntityAssemblyBench.RECIPES) {
 			if(recipe instanceof UuRecipe)
-			recipes.add(new UURecipeWrapper(PackPlugin.modRegistry.getJeiHelpers(), (UuRecipe)recipe));
+			recipes.add(new UURecipeWrapper(UuAssemblerPlugin.modRegistry.getJeiHelpers(), (UuRecipe)recipe));
 		}
 		return recipes;
 	}

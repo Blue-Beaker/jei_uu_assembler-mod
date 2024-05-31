@@ -4,6 +4,7 @@ import javax.annotation.Nonnull;
 
 import ic2.core.ref.BlockName;
 import ic2.core.ref.TeBlock;
+import ic2.jeiIntegration.transferhandlers.TransferHandlerBatchCrafter;
 import io.bluebeaker.jei_uu_assembler.JeiUuAssemblerMod;
 import io.bluebeaker.jei_uu_assembler.jei.uu.UURecipeCategory;
 import io.bluebeaker.jei_uu_assembler.jei.uu.UURecipeMaker;
@@ -19,7 +20,7 @@ import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 
 
 @JEIPlugin
-public class PackPlugin implements IModPlugin {
+public class UuAssemblerPlugin implements IModPlugin {
 
   private static IJeiRuntime jeiRuntime = null;
   public static IModRegistry modRegistry;
@@ -41,11 +42,13 @@ public class PackPlugin implements IModPlugin {
     registry.addRecipes(UURecipeMaker.getUuRecipe(), UURecipeCategory.UID);
 		registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.uu_assembly_bench), UURecipeCategory.UID);
     JeiUuAssemblerMod.logInfo("Loaded UU recipes!");
+
+		registry.getRecipeTransferRegistry().addRecipeTransferHandler(new TransferHandlerBatchCrafter(), UURecipeCategory.UID);
   }
 
   @Override
   public void onRuntimeAvailable(IJeiRuntime jeiRuntimeIn) {
-    PackPlugin.jeiRuntime = jeiRuntimeIn;
+    UuAssemblerPlugin.jeiRuntime = jeiRuntimeIn;
   }
 
   public static void setFilterText(@Nonnull String filterText) {
