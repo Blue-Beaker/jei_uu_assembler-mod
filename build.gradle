@@ -121,9 +121,9 @@ dependencies {
     }
 
     // Example of deobfuscating a dependency
-    // implementation rfg.deobf('curse.maven:had-enough-items-557549:4543375')
+    implementation rfg.deobf('curse.maven:had-enough-items-557549:4543375')
     // implementation rfg.deobf('mezz.jei:jei_1.12.2:4.7.11.102:api')
-    implementation rfg.deobf('mezz.jei:jei_1.12.2:4.7.11.102')
+    // implementation rfg.deobf('mezz.jei:jei_1.12.2:4.7.11.102')
     implementation rfg.deobf('industrialcraft-2:industrialcraft-2-2.8.222-ex112')
     if (project.use_mixins.toBoolean()) {
         // Change your mixin refmap name here:
