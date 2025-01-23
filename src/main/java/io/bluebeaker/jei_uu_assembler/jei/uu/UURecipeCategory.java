@@ -5,7 +5,7 @@ import java.util.List;
 import ic2.core.IC2;
 import ic2.core.block.TeBlockRegistry;
 import ic2.core.ref.TeBlock;
-import io.bluebeaker.jei_uu_assembler.Utils;
+import io.bluebeaker.jei_uu_assembler.utils.Utils;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.gui.ICraftingGridHelper;
