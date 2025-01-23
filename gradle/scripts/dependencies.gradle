@@ -43,7 +43,7 @@ dependencies {
     // For easier testing
     runtimeOnly rfg.deobf('curse.maven:ftb-library-legacy-forge-237167:2985811')
     runtimeOnly rfg.deobf('curse.maven:ftb-utilities-forge-237102:3157548')
-    
+
     implementation rfg.deobf('curse.maven:had-enough-items-557549:4543375')
     
     implementation rfg.deobf('industrialcraft-2:industrialcraft-2-2.8.222-ex112')
