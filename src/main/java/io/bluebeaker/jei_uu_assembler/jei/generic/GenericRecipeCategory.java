@@ -17,8 +17,6 @@ import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.plugins.vanilla.ingredients.fluid.FluidStackRenderer;
 import mezz.jei.util.Translator;
 
-import java.util.List;
-
 public abstract class GenericRecipeCategory<T extends IRecipeWrapper> implements IRecipeCategory<T> {
 
     private final IDrawable background;

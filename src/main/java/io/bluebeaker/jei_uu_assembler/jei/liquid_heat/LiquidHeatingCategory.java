@@ -36,9 +36,9 @@ public abstract class LiquidHeatingCategory extends GenericRecipeCategory<FluidH
     @Override
     public void setRecipe(IRecipeLayout recipeLayout, FluidHeatingRecipeWrapper wrapper, IIngredients iIngredients) {
         IGuiFluidStackGroup guiFluidStackGroup = recipeLayout.getFluidStacks();
-        this.addFluidSlot(guiFluidStackGroup,0,8,GUI_HEIGHT/2-8);
+        this.addFluidSlot(guiFluidStackGroup,0,8,GUI_HEIGHT/2-9);
         guiFluidStackGroup.set(0,wrapper.inputStack);
-        this.addFluidSlot(guiFluidStackGroup,1,this.GUI_WIDTH-24,GUI_HEIGHT/2-8);
+        this.addFluidSlot(guiFluidStackGroup,1,this.GUI_WIDTH-24,GUI_HEIGHT/2-9);
         guiFluidStackGroup.set(1,wrapper.outputStack);
     }
 

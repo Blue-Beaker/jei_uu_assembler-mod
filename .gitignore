@@ -22,5 +22,7 @@ eclipse
 run
 libs
 *.png~
+*.*~
+*.gui_0.png-autosave.kra
 # Files from Forge MDK
 forge*changelog.txt
