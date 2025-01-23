@@ -10,7 +10,7 @@ import java.util.List;
 
 public class LiquidHeatUp extends FluidHeatConversionCategory {
 
-    public static final String UID = "jei_uu_assembler.liquid_heatup";
+    public static final String UID = "jei_uu_assembler.stirling_kinetic_generator";
 
     public LiquidHeatUp(IGuiHelper guiHelper) {
         super(guiHelper);

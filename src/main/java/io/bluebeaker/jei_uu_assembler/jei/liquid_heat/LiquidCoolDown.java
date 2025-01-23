@@ -10,7 +10,7 @@ import java.util.List;
 
 public class LiquidCoolDown extends FluidHeatConversionCategory {
 
-    public static final String UID = "jei_uu_assembler.liquid_cooldown";
+    public static final String UID = "jei_uu_assembler.liquid_heat_exchanger";
 
     public LiquidCoolDown(IGuiHelper guiHelper) {
         super(guiHelper);
