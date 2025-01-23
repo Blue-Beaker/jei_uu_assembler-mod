@@ -12,18 +12,21 @@ import net.minecraftforge.fluids.FluidStack;
 
 import java.awt.*;
 
-public class FluidHeatingRecipeWrapper implements IRecipeWrapper {
+public class FluidHeatConversionRecipe implements IRecipeWrapper {
 
     protected final IJeiHelpers jeiHelpers;
     protected final FluidStack inputStack;
     protected final FluidStack outputStack;
     public final long energy;
 
-    public FluidHeatingRecipeWrapper(IJeiHelpers jeiHelpers, Fluid input, Fluid output, long energy) {
+    public FluidHeatConversionRecipe(IJeiHelpers jeiHelpers, FluidStack input, FluidStack output, long energy) {
         this.jeiHelpers = jeiHelpers;
-        this.inputStack = new FluidStack(input,1000);
-        this.outputStack = new FluidStack(output,1000);
+        this.inputStack = input;
+        this.outputStack = output;
         this.energy=energy;
+    }
+    public FluidHeatConversionRecipe(IJeiHelpers jeiHelpers, Fluid input, Fluid output, long energy) {
+        this(jeiHelpers,new FluidStack(input,1000), new FluidStack(output,1000),energy);
     }
 
     @Override

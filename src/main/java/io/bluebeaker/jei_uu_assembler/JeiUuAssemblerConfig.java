@@ -16,4 +16,6 @@ public class JeiUuAssemblerConfig {
     public static boolean liquid_heat_exchanger = true;
     @Config.RequiresMcRestart
     public static boolean stirling_kinetic_generator = true;
+    @Config.RequiresMcRestart
+    public static boolean steam_boiler = true;
 }

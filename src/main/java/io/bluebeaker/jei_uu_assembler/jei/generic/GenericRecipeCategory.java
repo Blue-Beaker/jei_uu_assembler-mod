@@ -1,12 +1,7 @@
 package io.bluebeaker.jei_uu_assembler.jei.generic;
 
-import ic2.core.ref.BlockName;
-import ic2.core.ref.TeBlock;
 import io.bluebeaker.jei_uu_assembler.JeiUuAssemblerMod;
-import io.bluebeaker.jei_uu_assembler.jei.generator.GeoGeneratorCategory;
 import mezz.jei.api.IGuiHelper;
-import mezz.jei.api.IJeiHelpers;
-import mezz.jei.api.IModRegistry;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiFluidStackGroup;
 import mezz.jei.api.gui.IGuiItemStackGroup;
@@ -22,7 +17,7 @@ public abstract class GenericRecipeCategory<T extends IRecipeWrapper> implements
     private final IDrawable background;
     private final IDrawable slotBackground;
     private final String localizedName;
-    private final FluidStackRenderer fluidStackRenderer = new FluidStackRenderer();
+    private final FluidStackRenderer fluidStackRenderer = new FluidStackRenderer(1,false,16,16,null);
     public final int GUI_WIDTH;
     public final int GUI_HEIGHT;
 

@@ -8,7 +8,7 @@ import mezz.jei.api.IJeiHelpers;
 
 import java.util.List;
 
-public class LiquidHeatUp extends LiquidHeatingCategory {
+public class LiquidHeatUp extends FluidHeatConversionCategory {
 
     public static final String UID = "jei_uu_assembler.liquid_heatup";
 
@@ -26,7 +26,7 @@ public class LiquidHeatUp extends LiquidHeatingCategory {
         return UID;
     }
 
-    public static List<FluidHeatingRecipeWrapper> getRecipes(IJeiHelpers jeiHelpers) {
-        return LiquidHeatingCategory.getRecipes(jeiHelpers,Recipes.liquidHeatupManager, Recipes.liquidHeatupManager.getSingleDirectionLiquidManager());
+    public static List<FluidHeatConversionRecipe> getRecipes(IJeiHelpers jeiHelpers) {
+        return FluidHeatConversionCategory.getRecipes(jeiHelpers,Recipes.liquidHeatupManager, Recipes.liquidHeatupManager.getSingleDirectionLiquidManager());
     }
 }
