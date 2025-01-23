@@ -32,7 +32,7 @@ public class FluidHeaterCategory extends FluidPowerRecipeCategory {
         List<FluidPowerRecipeWrapper> recipes = new ArrayList<>();
         for (Fluid acceptedFluid : Recipes.fluidHeatGenerator.getAcceptedFluids()) {
             IFluidHeatManager.BurnProperty burnProperty = Recipes.fluidHeatGenerator.getBurnProperty(acceptedFluid);
-            recipes.add(new FluidPowerRecipeWrapper(jeiHelpers,acceptedFluid,burnProperty.heat,burnProperty.amount));
+            recipes.add(new FluidHeatRecipeWrapper(jeiHelpers,acceptedFluid,burnProperty.heat,burnProperty.amount));
         }
         return recipes;
     }

@@ -12,9 +12,9 @@ import org.apache.logging.log4j.Logger;
 @Mod(modid = JeiUuAssemblerMod.MODID, name = JeiUuAssemblerMod.NAME, version = JeiUuAssemblerMod.VERSION)
 public class JeiUuAssemblerMod
 {
-    public static final String MODID = "jei_uu_assembler";
-    public static final String NAME = "Just Enough UU Assembler";
-    public static final String VERSION = "1.0";
+    public static final String MODID = Tags.MOD_ID;
+    public static final String NAME = Tags.MOD_NAME;
+    public static final String VERSION = Tags.VERSION;
 
     private static Logger logger;
 
