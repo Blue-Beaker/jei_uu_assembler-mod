@@ -1,4 +1,4 @@
-package io.bluebeaker.jei_uu_assembler.jei.misc;
+package io.bluebeaker.jei_uu_assembler.jei.liquid_heat;
 
 import io.bluebeaker.jei_uu_assembler.utils.EnergyUnit;
 import io.bluebeaker.jei_uu_assembler.utils.RenderUtils;

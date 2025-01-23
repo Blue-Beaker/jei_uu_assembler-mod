@@ -1,4 +1,4 @@
-package io.bluebeaker.jei_uu_assembler.jei.misc;
+package io.bluebeaker.jei_uu_assembler.jei.liquid_heat;
 
 import ic2.api.recipe.Recipes;
 import mezz.jei.api.IGuiHelper;
