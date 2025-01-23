@@ -1,6 +1,8 @@
 package io.bluebeaker.jei_uu_assembler.jei.liquid_heat;
 
 import ic2.api.recipe.Recipes;
+import ic2.core.ref.TeBlock;
+import io.bluebeaker.jei_uu_assembler.utils.Utils;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
 
@@ -16,7 +18,7 @@ public class LiquidCoolDown extends LiquidHeatingCategory {
 
     @Override
     public String getTranslationKey() {
-        return "gui.jei_uu_assembler.category.liquid_cooldown";
+        return Utils.getTranslationKeyFromTeBlock(TeBlock.liquid_heat_exchanger);
     }
 
     @Override

@@ -36,7 +36,6 @@ public class FluidHeatingRecipeWrapper implements IRecipeWrapper {
     public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
         int xPos = recipeWidth/2;
         int yPos = recipeHeight/2 - minecraft.fontRenderer.FONT_HEIGHT;
-
         RenderUtils.drawTextAlignedMiddle(this.energy+getPowerUnit()+"/mB", xPos, yPos, Color.gray.getRGB());
     }
 
