@@ -10,7 +10,7 @@ import net.minecraft.client.Minecraft;
 public abstract class FluidPowerRecipeCategory extends GenericRecipeCategory<FluidPowerRecipeWrapper> {
 
     public FluidPowerRecipeCategory(IGuiHelper guiHelper) {
-        super(guiHelper);
+        super(guiHelper,116,32);
     }
 
     @Override
@@ -21,7 +21,7 @@ public abstract class FluidPowerRecipeCategory extends GenericRecipeCategory<Flu
     @Override
     public void setRecipe(IRecipeLayout recipeLayout, FluidPowerRecipeWrapper wrapper, IIngredients iIngredients) {
         IGuiFluidStackGroup guiFluidStackGroup = recipeLayout.getFluidStacks();
-        this.addFluidSlot(guiFluidStackGroup,0,16,16);
+        this.addFluidSlot(guiFluidStackGroup,0,16,GUI_HEIGHT/2-8);
         guiFluidStackGroup.set(0,wrapper.getFluidStack());
     }
 

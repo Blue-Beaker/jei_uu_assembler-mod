@@ -13,18 +13,24 @@ import mezz.jei.plugins.vanilla.ingredients.fluid.FluidStackRenderer;
 import mezz.jei.util.Translator;
 
 public abstract class GenericRecipeCategory<T extends IRecipeWrapper> implements IRecipeCategory<T> {
-    public static final int width = 116;
-    public static final int height = 54;
 
     private final IDrawable background;
     private final IDrawable slotBackground;
     private final String localizedName;
     private final FluidStackRenderer fluidStackRenderer = new FluidStackRenderer();
+    public final int GUI_WIDTH;
+    public final int GUI_HEIGHT;
 
     public GenericRecipeCategory(IGuiHelper guiHelper) {
+        this(guiHelper,116,54);
+    }
+
+    public GenericRecipeCategory(IGuiHelper guiHelper, int width, int height) {
         this.background = guiHelper.createBlankDrawable(width, height);
         this.slotBackground = guiHelper.getSlotDrawable();
         this.localizedName = Translator.translateToLocal(this.getTranslationKey());
+        this.GUI_WIDTH = width;
+        this.GUI_HEIGHT = height;
     }
 
     public abstract String getTranslationKey();

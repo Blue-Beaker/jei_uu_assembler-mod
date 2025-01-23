@@ -5,6 +5,7 @@ import java.util.List;
 import ic2.core.IC2;
 import ic2.core.block.TeBlockRegistry;
 import ic2.core.ref.TeBlock;
+import io.bluebeaker.jei_uu_assembler.JeiUuAssemblerMod;
 import io.bluebeaker.jei_uu_assembler.utils.Utils;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
@@ -73,7 +74,7 @@ public class UURecipeCategory implements IRecipeCategory<IRecipeWrapper> {
 
 	@Override
 	public String getModName() {
-		return IC2.MODID;
+		return JeiUuAssemblerMod.MODID;
 	}
 
 	@Override

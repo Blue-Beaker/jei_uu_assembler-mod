@@ -1,6 +1,7 @@
 package io.bluebeaker.jei_uu_assembler.jei.generator;
 
 import io.bluebeaker.jei_uu_assembler.utils.EnergyUnit;
+import io.bluebeaker.jei_uu_assembler.utils.RenderUtils;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
@@ -8,6 +9,8 @@ import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
+
+import java.awt.*;
 
 public class FluidPowerRecipeWrapper implements IRecipeWrapper {
 
@@ -34,12 +37,13 @@ public class FluidPowerRecipeWrapper implements IRecipeWrapper {
 
     @Override
     public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
-        int xPos = 50;
-        int yPos = 16;
+        int xPos = recipeWidth - 8;
+        int yPos = recipeHeight/2 - minecraft.fontRenderer.FONT_HEIGHT;
 
-        minecraft.fontRenderer.drawString(this.power+getPowerUnit()+"/t", xPos, yPos, 0xff000000);
+        RenderUtils.drawTextAlignedRight(this.power+getPowerUnit()+"/t", xPos, yPos, Color.gray.getRGB());
         yPos += minecraft.fontRenderer.FONT_HEIGHT + 2;
-        minecraft.fontRenderer.drawString(this.energy+getPowerUnit()+"/mB", xPos, yPos, 0xff000000);
+
+        RenderUtils.drawTextAlignedRight(this.energy+getPowerUnit()+"/mB", xPos, yPos, Color.gray.getRGB());
     }
 
     public String getPowerUnit(){
