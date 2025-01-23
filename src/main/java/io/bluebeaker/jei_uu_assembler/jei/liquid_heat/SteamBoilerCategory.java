@@ -28,15 +28,15 @@ public class SteamBoilerCategory extends GenericRecipeCategory<FluidHeatConversi
     public static final String UID = "jei_uu_assembler.steam_boiler";
 
     public SteamBoilerCategory(IGuiHelper guiHelper) {
-        super(guiHelper,116,48);
+        super(guiHelper,116,38);
         this.bgArrow = guiHelper.createDrawable(Constants.GUI_0, 0, 17, 48, 10);
         this.arrow = guiHelper.drawableBuilder(Constants.GUI_0, 48, 17, 48, 10).buildAnimated(200, IDrawableAnimated.StartDirection.LEFT, false);
     }
 
     @Override
     public void drawExtras(Minecraft minecraft) {
-        this.bgArrow.draw(minecraft, 34, 32);
-        this.arrow.draw(minecraft, 34, 32);
+        this.bgArrow.draw(minecraft, 34, 22);
+        this.arrow.draw(minecraft, 34, 22);
     }
 
     @Override
@@ -66,8 +66,8 @@ public class SteamBoilerCategory extends GenericRecipeCategory<FluidHeatConversi
         FluidStack superheatedSteam = new FluidStack(FluidName.superheated_steam.getInstance(), 100);
         recipes.add(new SteamBoilerRecipe(jeiHelpers, water, steam,100,100,0,true));
         recipes.add(new SteamBoilerRecipe(jeiHelpers, distilledWater, steam,100,100,0,false));
-        recipes.add(new SteamBoilerRecipe(jeiHelpers, water, superheatedSteam,100,375,221,true));
-        recipes.add(new SteamBoilerRecipe(jeiHelpers, distilledWater, superheatedSteam,100,375,221,false));
+        recipes.add(new SteamBoilerRecipe(jeiHelpers, water, superheatedSteam,100,374,220,true));
+        recipes.add(new SteamBoilerRecipe(jeiHelpers, distilledWater, superheatedSteam,100,374,220,false));
         return recipes;
     }
 
@@ -85,9 +85,9 @@ public class SteamBoilerCategory extends GenericRecipeCategory<FluidHeatConversi
         public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
             int xPos = recipeWidth/2;
             int yPos = 1;
-            RenderUtils.drawTextAlignedMiddle(this.energy+getPowerUnit(), xPos, yPos, Color.gray.getRGB());
-            yPos += minecraft.fontRenderer.FONT_HEIGHT+1;
             RenderUtils.drawTextAlignedMiddle(temp+"°C "+pressure+"Bar", xPos, yPos, Color.gray.getRGB());
+            yPos += minecraft.fontRenderer.FONT_HEIGHT+1;
+            RenderUtils.drawTextAlignedMiddle(this.energy+getPowerUnit(), xPos, yPos, Color.gray.getRGB());
         }
     }
 }
