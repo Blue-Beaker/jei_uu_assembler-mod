@@ -1,6 +1,8 @@
 package io.bluebeaker.jei_uu_assembler.jei;
 
+import ic2.core.item.type.CraftingItemType;
 import ic2.core.ref.BlockName;
+import ic2.core.ref.ItemName;
 import ic2.core.ref.TeBlock;
 import ic2.jeiIntegration.transferhandlers.TransferHandlerBatchCrafter;
 import io.bluebeaker.jei_uu_assembler.JeiUuAssemblerConfig;
@@ -11,6 +13,7 @@ import io.bluebeaker.jei_uu_assembler.jei.generator.SemiFluidGeneratorCategory;
 import io.bluebeaker.jei_uu_assembler.jei.liquid_heat.LiquidCoolDown;
 import io.bluebeaker.jei_uu_assembler.jei.liquid_heat.LiquidHeatUp;
 import io.bluebeaker.jei_uu_assembler.jei.liquid_heat.SteamBoilerCategory;
+import io.bluebeaker.jei_uu_assembler.jei.liquid_heat.SteamTurbineCategory;
 import io.bluebeaker.jei_uu_assembler.jei.uu.UURecipeCategory;
 import io.bluebeaker.jei_uu_assembler.jei.uu.UURecipeMaker;
 import mezz.jei.api.*;
@@ -44,6 +47,8 @@ public class UuAssemblerPlugin implements IModPlugin {
       registry.addRecipeCategories(new LiquidCoolDown(guiHelper));
     if(JeiUuAssemblerConfig.steam_boiler)
       registry.addRecipeCategories(new SteamBoilerCategory(guiHelper));
+    if(JeiUuAssemblerConfig.steam_turbine)
+      registry.addRecipeCategories(new SteamTurbineCategory(guiHelper));
   }
 
   @Override
@@ -57,35 +62,35 @@ public class UuAssemblerPlugin implements IModPlugin {
       registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.uu_assembly_bench), UURecipeCategory.UID);
       registry.getRecipeTransferRegistry().addRecipeTransferHandler(new TransferHandlerBatchCrafter(), UURecipeCategory.UID);
     }
-
     if (JeiUuAssemblerConfig.geo_generator) {
       registry.addRecipes(GeoGeneratorCategory.getRecipes(jeiHelpers),GeoGeneratorCategory.UID);
       registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.geo_generator), GeoGeneratorCategory.UID);
     }
-
     if (JeiUuAssemblerConfig.semifluid_generator) {
       registry.addRecipes(SemiFluidGeneratorCategory.getRecipes(jeiHelpers), SemiFluidGeneratorCategory.UID);
       registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.semifluid_generator), SemiFluidGeneratorCategory.UID);
     }
-
     if (JeiUuAssemblerConfig.fluid_heater) {
       registry.addRecipes(FluidHeaterCategory.getRecipes(jeiHelpers),FluidHeaterCategory.UID);
       registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.fluid_heat_generator), FluidHeaterCategory.UID);
     }
-
     if (JeiUuAssemblerConfig.stirling_kinetic_generator) {
       registry.addRecipes(LiquidHeatUp.getRecipes(jeiHelpers), LiquidHeatUp.UID);
       registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.stirling_kinetic_generator), LiquidHeatUp.UID);
     }
-
     if (JeiUuAssemblerConfig.liquid_heat_exchanger) {
       registry.addRecipes(LiquidCoolDown.getRecipes(jeiHelpers), LiquidCoolDown.UID);
       registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.liquid_heat_exchanger), LiquidCoolDown.UID);
+      registry.addRecipeCatalyst(ItemName.crafting.getItemStack(CraftingItemType.heat_conductor), LiquidCoolDown.UID);
     }
-
     if(JeiUuAssemblerConfig.steam_boiler){
       registry.addRecipes(SteamBoilerCategory.getRecipes(jeiHelpers), SteamBoilerCategory.UID);
       registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.steam_generator), SteamBoilerCategory.UID);
+    }
+    if(JeiUuAssemblerConfig.steam_turbine){
+      registry.addRecipes(SteamTurbineCategory.getRecipes(jeiHelpers), SteamTurbineCategory.UID);
+      registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.steam_kinetic_generator), SteamTurbineCategory.UID);
+      registry.addRecipeCatalyst(ItemName.crafting.getItemStack(CraftingItemType.steam_turbine), SteamTurbineCategory.UID);
     }
     JeiUuAssemblerMod.logInfo("Loaded all recipes!");
   }

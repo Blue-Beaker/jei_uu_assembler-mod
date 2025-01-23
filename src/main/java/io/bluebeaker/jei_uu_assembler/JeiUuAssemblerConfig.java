@@ -18,4 +18,6 @@ public class JeiUuAssemblerConfig {
     public static boolean stirling_kinetic_generator = true;
     @Config.RequiresMcRestart
     public static boolean steam_boiler = true;
+    @Config.RequiresMcRestart
+    public static boolean steam_turbine = true;
 }
