@@ -10,10 +10,7 @@ import io.bluebeaker.jei_uu_assembler.JeiUuAssemblerMod;
 import io.bluebeaker.jei_uu_assembler.jei.generator.FluidHeaterCategory;
 import io.bluebeaker.jei_uu_assembler.jei.generator.GeoGeneratorCategory;
 import io.bluebeaker.jei_uu_assembler.jei.generator.SemiFluidGeneratorCategory;
-import io.bluebeaker.jei_uu_assembler.jei.liquid_heat.LiquidCoolDown;
-import io.bluebeaker.jei_uu_assembler.jei.liquid_heat.LiquidHeatUp;
-import io.bluebeaker.jei_uu_assembler.jei.liquid_heat.SteamBoilerCategory;
-import io.bluebeaker.jei_uu_assembler.jei.liquid_heat.SteamTurbineCategory;
+import io.bluebeaker.jei_uu_assembler.jei.liquid_heat.*;
 import io.bluebeaker.jei_uu_assembler.jei.uu.UURecipeCategory;
 import io.bluebeaker.jei_uu_assembler.jei.uu.UURecipeMaker;
 import mezz.jei.api.*;
@@ -49,6 +46,8 @@ public class UuAssemblerPlugin implements IModPlugin {
       registry.addRecipeCategories(new SteamBoilerCategory(guiHelper));
     if(JeiUuAssemblerConfig.steam_turbine)
       registry.addRecipeCategories(new SteamTurbineCategory(guiHelper));
+    if(JeiUuAssemblerConfig.fermenter)
+      registry.addRecipeCategories(new FermenterCategory(guiHelper));
   }
 
   @Override
@@ -91,6 +90,10 @@ public class UuAssemblerPlugin implements IModPlugin {
       registry.addRecipes(SteamTurbineCategory.getRecipes(jeiHelpers), SteamTurbineCategory.UID);
       registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.steam_kinetic_generator), SteamTurbineCategory.UID);
       registry.addRecipeCatalyst(ItemName.crafting.getItemStack(CraftingItemType.steam_turbine), SteamTurbineCategory.UID);
+    }
+    if(JeiUuAssemblerConfig.fermenter){
+      registry.addRecipes(FermenterCategory.getRecipes(jeiHelpers), FermenterCategory.UID);
+      registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.fermenter), FermenterCategory.UID);
     }
     JeiUuAssemblerMod.logInfo("Loaded all recipes!");
   }

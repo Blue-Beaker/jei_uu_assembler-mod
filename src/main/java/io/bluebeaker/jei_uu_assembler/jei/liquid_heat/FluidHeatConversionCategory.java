@@ -29,8 +29,8 @@ public abstract class FluidHeatConversionCategory extends GenericRecipeCategory<
 
     @Override
     public void drawExtras(Minecraft minecraft) {
-        this.bgArrow.draw(minecraft, 34, 16);
-        this.arrow.draw(minecraft, 34, 16);
+        this.bgArrow.draw(minecraft, 34, GUI_HEIGHT/2);
+        this.arrow.draw(minecraft, 34, GUI_HEIGHT/2);
     }
 
     @Override

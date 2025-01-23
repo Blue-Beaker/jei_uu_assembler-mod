@@ -65,7 +65,6 @@ public class SteamTurbineCategory extends GenericRecipeCategory<FluidHeatConvers
     }
 
     public static List<SteamTurbineRecipe> getRecipes(IJeiHelpers jeiHelpers) {
-
         float outputModifier = ConfigUtil.getFloat(MainConfig.get(), "balance/energy/kineticgenerator/steam");
 
         List<SteamTurbineRecipe> recipes = new ArrayList<>();

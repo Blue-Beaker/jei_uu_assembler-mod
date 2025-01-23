@@ -1,7 +1,5 @@
 package io.bluebeaker.jei_uu_assembler.jei.generator;
 
-import ic2.api.recipe.ISemiFluidFuelManager;
-import ic2.api.recipe.Recipes;
 import ic2.core.init.MainConfig;
 import ic2.core.ref.TeBlock;
 import ic2.core.util.ConfigUtil;
@@ -33,7 +31,8 @@ public class GeoGeneratorCategory extends FluidPowerRecipeCategory {
     }
 
     public static List<FluidPowerRecipeWrapper> getRecipes(IJeiHelpers jeiHelpers){
-        int gain = Math.round(20.0F * ConfigUtil.getFloat(MainConfig.get(), "balance/energy/generator/geothermal"));
+        float multiplier = ConfigUtil.getFloat(MainConfig.get(), "balance/energy/generator/geothermal");
+        int gain = Math.round(20.0F * multiplier);
 
         Fluid acceptedFluid = FluidRegistry.LAVA;
 
