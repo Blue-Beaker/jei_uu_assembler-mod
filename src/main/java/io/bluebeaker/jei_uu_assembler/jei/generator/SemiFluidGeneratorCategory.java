@@ -12,10 +12,10 @@ import net.minecraftforge.fluids.Fluid;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FluidGeneratorCategory extends FluidPowerRecipeCategory {
+public class SemiFluidGeneratorCategory extends FluidPowerRecipeCategory {
     public static final String UID = "jei_uu_assembler.gen_fluid";
     public static final EnergyUnit ENERGY_UNIT = EnergyUnit.EU;
-    public FluidGeneratorCategory(IGuiHelper guiHelper) {
+    public SemiFluidGeneratorCategory(IGuiHelper guiHelper) {
         super(guiHelper);
     }
 

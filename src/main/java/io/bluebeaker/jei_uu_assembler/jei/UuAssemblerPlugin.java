@@ -1,13 +1,13 @@
 package io.bluebeaker.jei_uu_assembler.jei;
 
 import ic2.core.ref.BlockName;
-import ic2.core.ref.ItemName;
 import ic2.core.ref.TeBlock;
 import ic2.jeiIntegration.transferhandlers.TransferHandlerBatchCrafter;
+import io.bluebeaker.jei_uu_assembler.JeiUuAssemblerConfig;
 import io.bluebeaker.jei_uu_assembler.JeiUuAssemblerMod;
 import io.bluebeaker.jei_uu_assembler.jei.generator.FluidHeaterCategory;
 import io.bluebeaker.jei_uu_assembler.jei.generator.GeoGeneratorCategory;
-import io.bluebeaker.jei_uu_assembler.jei.generator.FluidGeneratorCategory;
+import io.bluebeaker.jei_uu_assembler.jei.generator.SemiFluidGeneratorCategory;
 import io.bluebeaker.jei_uu_assembler.jei.misc.LiquidCoolDown;
 import io.bluebeaker.jei_uu_assembler.jei.misc.LiquidHeatUp;
 import io.bluebeaker.jei_uu_assembler.jei.uu.UURecipeCategory;
@@ -29,13 +29,18 @@ public class UuAssemblerPlugin implements IModPlugin {
   public void registerCategories(IRecipeCategoryRegistration registry) {
     IJeiHelpers jeiHelpers = registry.getJeiHelpers();
     IGuiHelper guiHelper = jeiHelpers.getGuiHelper();
-    registry.addRecipeCategories(new UURecipeCategory(guiHelper));
-
-    registry.addRecipeCategories(new GeoGeneratorCategory(guiHelper));
-    registry.addRecipeCategories(new FluidGeneratorCategory(guiHelper));
-    registry.addRecipeCategories(new FluidHeaterCategory(guiHelper));
-    registry.addRecipeCategories(new LiquidHeatUp(guiHelper));
-    registry.addRecipeCategories(new LiquidCoolDown(guiHelper));
+    if(JeiUuAssemblerConfig.uu_assembler)
+      registry.addRecipeCategories(new UURecipeCategory(guiHelper));
+    if(JeiUuAssemblerConfig.geo_generator)
+      registry.addRecipeCategories(new GeoGeneratorCategory(guiHelper));
+    if(JeiUuAssemblerConfig.semifluid_generator)
+      registry.addRecipeCategories(new SemiFluidGeneratorCategory(guiHelper));
+    if(JeiUuAssemblerConfig.fluid_heater)
+      registry.addRecipeCategories(new FluidHeaterCategory(guiHelper));
+    if(JeiUuAssemblerConfig.stirling_kinetic_generator)
+      registry.addRecipeCategories(new LiquidHeatUp(guiHelper));
+    if(JeiUuAssemblerConfig.liquid_heat_exchanger)
+      registry.addRecipeCategories(new LiquidCoolDown(guiHelper));
   }
 
   @Override
@@ -43,26 +48,38 @@ public class UuAssemblerPlugin implements IModPlugin {
     modRegistry=registry;
     IJeiHelpers jeiHelpers = registry.getJeiHelpers();
 
-    JeiUuAssemblerMod.logInfo("Started loading UU recipes...");
-    registry.addRecipes(UURecipeMaker.getUuRecipe(), UURecipeCategory.UID);
-    registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.uu_assembly_bench), UURecipeCategory.UID);
-    JeiUuAssemblerMod.logInfo("Loaded UU recipes!");
-    registry.getRecipeTransferRegistry().addRecipeTransferHandler(new TransferHandlerBatchCrafter(), UURecipeCategory.UID);
+    if(JeiUuAssemblerConfig.uu_assembler){
+      JeiUuAssemblerMod.logInfo("Started loading UU recipes...");
+      registry.addRecipes(UURecipeMaker.getUuRecipe(), UURecipeCategory.UID);
+      registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.uu_assembly_bench), UURecipeCategory.UID);
+      JeiUuAssemblerMod.logInfo("Loaded UU recipes!");
+      registry.getRecipeTransferRegistry().addRecipeTransferHandler(new TransferHandlerBatchCrafter(), UURecipeCategory.UID);
+    }
 
-    registry.addRecipes(GeoGeneratorCategory.getRecipes(jeiHelpers),GeoGeneratorCategory.UID);
-    registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.geo_generator), GeoGeneratorCategory.UID);
+    if (JeiUuAssemblerConfig.geo_generator) {
+        registry.addRecipes(GeoGeneratorCategory.getRecipes(jeiHelpers),GeoGeneratorCategory.UID);
+        registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.geo_generator), GeoGeneratorCategory.UID);
+    }
 
-    registry.addRecipes(FluidGeneratorCategory.getRecipes(jeiHelpers), FluidGeneratorCategory.UID);
-    registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.semifluid_generator), FluidGeneratorCategory.UID);
+    if (JeiUuAssemblerConfig.semifluid_generator) {
+        registry.addRecipes(SemiFluidGeneratorCategory.getRecipes(jeiHelpers), SemiFluidGeneratorCategory.UID);
+        registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.semifluid_generator), SemiFluidGeneratorCategory.UID);
+    }
 
-    registry.addRecipes(FluidHeaterCategory.getRecipes(jeiHelpers),FluidHeaterCategory.UID);
-    registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.fluid_heat_generator), FluidHeaterCategory.UID);
+    if (JeiUuAssemblerConfig.fluid_heater) {
+        registry.addRecipes(FluidHeaterCategory.getRecipes(jeiHelpers),FluidHeaterCategory.UID);
+        registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.fluid_heat_generator), FluidHeaterCategory.UID);
+    }
 
-    registry.addRecipes(LiquidHeatUp.getRecipes(jeiHelpers), LiquidHeatUp.UID);
-    registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.stirling_kinetic_generator), LiquidHeatUp.UID);
+    if (JeiUuAssemblerConfig.stirling_kinetic_generator) {
+        registry.addRecipes(LiquidHeatUp.getRecipes(jeiHelpers), LiquidHeatUp.UID);
+        registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.stirling_kinetic_generator), LiquidHeatUp.UID);
+    }
 
-    registry.addRecipes(LiquidCoolDown.getRecipes(jeiHelpers), LiquidCoolDown.UID);
-    registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.liquid_heat_exchanger), LiquidCoolDown.UID);
+    if (JeiUuAssemblerConfig.liquid_heat_exchanger) {
+        registry.addRecipes(LiquidCoolDown.getRecipes(jeiHelpers), LiquidCoolDown.UID);
+        registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.liquid_heat_exchanger), LiquidCoolDown.UID);
+    }
 
   }
 

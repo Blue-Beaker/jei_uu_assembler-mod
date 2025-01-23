@@ -1,10 +1,14 @@
 package io.bluebeaker.jei_uu_assembler;
 
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Config;
+import net.minecraftforge.common.config.ConfigManager;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.apache.logging.log4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -28,5 +32,12 @@ public class JeiUuAssemblerMod
     }
     public static void logInfo(String info){
         logger.info(info);
+    }
+
+    @SubscribeEvent
+    public void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
+        if (event.getModID().equals(MODID)) {
+            ConfigManager.sync(MODID, Config.Type.INSTANCE);
+        }
     }
 }
