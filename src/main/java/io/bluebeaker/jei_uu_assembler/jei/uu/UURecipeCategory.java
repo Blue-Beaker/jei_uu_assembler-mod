@@ -2,7 +2,6 @@ package io.bluebeaker.jei_uu_assembler.jei.uu;
 
 import java.util.List;
 
-import ic2.core.IC2;
 import ic2.core.block.TeBlockRegistry;
 import ic2.core.ref.TeBlock;
 import io.bluebeaker.jei_uu_assembler.JeiUuAssemblerMod;
@@ -36,7 +35,7 @@ public class UURecipeCategory implements IRecipeCategory<IRecipeWrapper> {
     public UURecipeCategory(IGuiHelper guiHelper) {
 		ResourceLocation location = Constants.RECIPE_GUI_VANILLA;
 		background = guiHelper.createDrawable(location, 0, 60, width, height);
-		localizedName = Utils.Translator.localize(TeBlockRegistry.get(TeBlock.uu_assembly_bench.getIdentifier()).getItemStack(TeBlock.uu_assembly_bench).getTranslationKey(), null);
+		localizedName = Utils.localize(TeBlockRegistry.get(TeBlock.uu_assembly_bench.getIdentifier()).getItemStack(TeBlock.uu_assembly_bench).getTranslationKey());
 		craftingGridHelper = guiHelper.createCraftingGridHelper(craftInputSlot1, craftOutputSlot);
     }
 
