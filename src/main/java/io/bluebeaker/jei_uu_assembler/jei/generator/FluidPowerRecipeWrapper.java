@@ -20,8 +20,12 @@ public class FluidPowerRecipeWrapper implements IRecipeWrapper {
     public final long energy;
 
     public FluidPowerRecipeWrapper(IJeiHelpers jeiHelpers, Fluid fluid, long power, long energy) {
+        this(jeiHelpers,new FluidStack(fluid,1000),power,energy);
+    }
+
+    public FluidPowerRecipeWrapper(IJeiHelpers jeiHelpers, FluidStack stack, long power, long energy) {
         this.jeiHelpers = jeiHelpers;
-        this.fluidStack = new FluidStack(fluid,1000);
+        this.fluidStack = stack;
         this.power=power;
         this.energy=energy;
     }
