@@ -5,6 +5,7 @@ Modpacks can utilize classic UU-matter and UU Assembler in experimental IC2, and
 
 Now also shows recipes for:  
 - UU assembly bench  
+- Mass Fabricator  
 - Geothermal generator  
 - Semifluid generator  
 - Fluid heater  

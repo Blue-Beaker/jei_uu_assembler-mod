@@ -1,9 +1,5 @@
 package io.bluebeaker.jei_uu_assembler.jei.uu;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import ic2.core.block.machine.tileentity.TileEntityAssemblyBench.UuRecipe;
 import ic2.core.item.type.MiscResourceType;
 import ic2.core.ref.ItemName;
@@ -12,6 +8,10 @@ import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.item.ItemStack;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class UURecipeWrapper implements IRecipeWrapper {
 	private final IJeiHelpers jeiHelpers;
@@ -35,7 +35,7 @@ public class UURecipeWrapper implements IRecipeWrapper {
 		int height=3;
 		int width=3;
 		for(int y=0; y < height; ++y) {
-			boolean[] layer = ((AccessorUuRecipe)recipe).getShape()[y];
+			boolean[] layer = ((AccessorUuRecipe) recipe).getShape()[y];
 			for(int x = 0; x < width; ++x) {
 				if (layer[x]) {
 					lists.add(x+y*3,Collections.singletonList(uu));
@@ -46,4 +46,5 @@ public class UURecipeWrapper implements IRecipeWrapper {
 		}
 		return lists;
 	}
+
 }

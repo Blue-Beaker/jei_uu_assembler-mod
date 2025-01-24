@@ -1,13 +1,14 @@
 {
-	"package": "io.bluebeaker.jei_uu_assembler.mixin",
-	"required": true,
-	"refmap": "${mixin_refmap}",
-	"target": "@env(DEFAULT)",
-	"minVersion": "0.8.5",
-	"compatibilityLevel": "JAVA_8",
-	"mixins": [
-    "AccessorUuRecipe"
+  "package": "io.bluebeaker.jei_uu_assembler.mixin",
+  "required": true,
+  "refmap": "${mixin_refmap}",
+  "target": "@env(DEFAULT)",
+  "minVersion": "0.8.5",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "AccessorUuRecipe",
+    "AccessorTileEntityMassFabricator"
   ],
-	"server": [],
-	"client": []
+  "server": [],
+  "client": []
 }

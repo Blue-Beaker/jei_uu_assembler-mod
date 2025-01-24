@@ -11,6 +11,7 @@ import io.bluebeaker.jei_uu_assembler.jei.generator.FluidHeaterCategory;
 import io.bluebeaker.jei_uu_assembler.jei.generator.GeoGeneratorCategory;
 import io.bluebeaker.jei_uu_assembler.jei.generator.SemiFluidGeneratorCategory;
 import io.bluebeaker.jei_uu_assembler.jei.liquid_heat.*;
+import io.bluebeaker.jei_uu_assembler.jei.massfab.MassFabRecipeCategory;
 import io.bluebeaker.jei_uu_assembler.jei.uu.UURecipeCategory;
 import io.bluebeaker.jei_uu_assembler.jei.uu.UURecipeMaker;
 import mezz.jei.api.*;
@@ -48,6 +49,8 @@ public class UuAssemblerPlugin implements IModPlugin {
       registry.addRecipeCategories(new SteamTurbineCategory(guiHelper));
     if(JeiUuAssemblerConfig.fermenter)
       registry.addRecipeCategories(new FermenterCategory(guiHelper));
+    if(JeiUuAssemblerConfig.mass_fabricator)
+      registry.addRecipeCategories(new MassFabRecipeCategory(guiHelper));
   }
 
   @Override
@@ -94,6 +97,10 @@ public class UuAssemblerPlugin implements IModPlugin {
     if(JeiUuAssemblerConfig.fermenter){
       registry.addRecipes(FermenterCategory.getRecipes(jeiHelpers), FermenterCategory.UID);
       registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.fermenter), FermenterCategory.UID);
+    }
+    if(JeiUuAssemblerConfig.mass_fabricator){
+      registry.addRecipes(MassFabRecipeCategory.getRecipes(jeiHelpers), MassFabRecipeCategory.UID);
+      registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.mass_fabricator), MassFabRecipeCategory.UID);
     }
     JeiUuAssemblerMod.logInfo("Loaded all recipes!");
   }
