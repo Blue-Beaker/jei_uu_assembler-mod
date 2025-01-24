@@ -27,32 +27,39 @@ import java.util.List;
 
 public class FermenterCategory extends GenericRecipeCategory<FluidHeatConversionRecipe> {
     protected final IDrawableStatic bgArrow;
-    protected final IDrawableAnimated arrow;
+    protected final IDrawableStatic bgArrow2;
     private static final ItemStack fertilizer = ItemName.crop_res.getItemStack(CropResItemType.fertilizer);
+
+    private static final int WIDTH = 116;
+    private static final int HEIGHT = 50;
+
+    private static final int TEXT_X = WIDTH/2;
+    private static final int TEXT_Y = 16;
+
     public static final String UID = "jei_uu_assembler.fermenter";
 
     public FermenterCategory(IGuiHelper guiHelper) {
-        super(guiHelper,116,32);
+        super(guiHelper,WIDTH,HEIGHT);
         this.bgArrow = guiHelper.createDrawable(Constants.GUI_0, 0, 17, 48, 10);
-        this.arrow = guiHelper.drawableBuilder(Constants.GUI_0, 48, 17, 48, 10).buildAnimated(200, IDrawableAnimated.StartDirection.LEFT, false);
+        this.bgArrow2 = guiHelper.createDrawable(Constants.GUI_0, 0, 27, 48, 4);
     }
 
     @Override
     public void drawExtras(Minecraft minecraft) {
-        this.bgArrow.draw(minecraft, GUI_WIDTH/2-9-24, GUI_HEIGHT/2);
-        this.arrow.draw(minecraft, GUI_WIDTH/2-9-24, GUI_HEIGHT/2);
+        this.bgArrow.draw(minecraft, TEXT_X-24, TEXT_Y);
+        this.bgArrow2.draw(minecraft, TEXT_X-24, TEXT_Y+10);
     }
 
     @Override
     public void setRecipe(IRecipeLayout recipeLayout, FluidHeatConversionRecipe wrapper, IIngredients iIngredients) {
         IGuiItemStackGroup guiItemStackGroup = recipeLayout.getItemStacks();
-        this.addItemSlot(guiItemStackGroup,0,this.GUI_WIDTH-20,GUI_HEIGHT-30);
+        this.addItemSlot(guiItemStackGroup,0,WIDTH-26,HEIGHT-26);
         guiItemStackGroup.set(0, fertilizer);
 
         IGuiFluidStackGroup guiFluidStackGroup = recipeLayout.getFluidStacks();
-        this.addFluidSlot(guiFluidStackGroup,0,2,GUI_HEIGHT-30);
+        this.addFluidSlot(guiFluidStackGroup,0,8,HEIGHT-35);
         guiFluidStackGroup.set(0,wrapper.inputStack);
-        this.addFluidSlot(guiFluidStackGroup,1,this.GUI_WIDTH-38,GUI_HEIGHT-30);        guiFluidStackGroup.set(1,wrapper.outputStack);
+        this.addFluidSlot(guiFluidStackGroup,1,WIDTH-26,HEIGHT-44);        guiFluidStackGroup.set(1,wrapper.outputStack);
     }
 
     @Override
@@ -78,8 +85,13 @@ public class FermenterCategory extends GenericRecipeCategory<FluidHeatConversion
 
     public static class FermenterRecipe extends FluidHeatConversionRecipe {
         int fertilizer_count = ConfigUtil.getInt(MainConfig.get(), "balance/fermenter/biomass_per_fertilizier");
+        private final IDrawableAnimated arrow1;
+        private final IDrawableAnimated arrow2;
         public FermenterRecipe(IJeiHelpers jeiHelpers, FluidStack input, FluidStack output, long energy) {
             super(jeiHelpers, input, output, energy);
+            IGuiHelper guiHelper = jeiHelpers.getGuiHelper();
+            arrow1= guiHelper.drawableBuilder(Constants.GUI_0, 48, 17, 48, 10).buildAnimated((int) (this.energy/100), IDrawableAnimated.StartDirection.LEFT,false);
+            arrow2= guiHelper.drawableBuilder(Constants.GUI_0, 48, 27, 48, 4).buildAnimated((int) (this.energy/100*fertilizer_count/input.amount), IDrawableAnimated.StartDirection.LEFT,false);
         }
         @Override
         public void getIngredients(IIngredients iIngredients) {
@@ -88,8 +100,10 @@ public class FermenterCategory extends GenericRecipeCategory<FluidHeatConversion
         }
         @Override
         public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
-            RenderUtils.drawTextAlignedMiddle(this.energy+getPowerUnit(), recipeWidth/2-9, recipeHeight/2 - minecraft.fontRenderer.FONT_HEIGHT, Color.gray.getRGB());
-            RenderUtils.drawTextAlignedRight("+"+this.inputStack.amount*100/fertilizer_count+"%", recipeWidth-2, recipeHeight-9, Color.gray.getRGB());
+            this.arrow1.draw(minecraft, TEXT_X-24, TEXT_Y);
+            this.arrow2.draw(minecraft, TEXT_X-24, TEXT_Y+10);
+            RenderUtils.drawTextAlignedMiddle(this.energy+getPowerUnit(), TEXT_X, TEXT_Y - minecraft.fontRenderer.FONT_HEIGHT, Color.gray.getRGB());
+            RenderUtils.drawTextAlignedRight("+"+this.inputStack.amount*100/fertilizer_count+"%", recipeWidth-27, recipeHeight-16, Color.gray.getRGB());
         }
     }
 }
