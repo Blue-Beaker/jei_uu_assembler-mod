@@ -21,11 +21,13 @@ public class CropRecipeWrapper implements IRecipeWrapper {
     protected final ItemStack inputStack;
     protected final CropCard card;
     protected final List<ItemStack> outputs = new ArrayList<>();
+    protected List<Integer> chances;
 
-    public CropRecipeWrapper(IJeiHelpers jeiHelpers, CropCard card, ItemStack input, List<ItemStack> outputs) {
+    public CropRecipeWrapper(IJeiHelpers jeiHelpers, CropCard card, ItemStack input, List<ItemStack> outputs, List<Integer> chances) {
         this.jeiHelpers = jeiHelpers;
         this.inputStack = input;
         this.card=card;
+        this.chances=chances;
         this.outputs.addAll(outputs);
     }
 
@@ -37,9 +39,16 @@ public class CropRecipeWrapper implements IRecipeWrapper {
 
     @Override
     public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
-        int xPos = recipeWidth/2;
-        int yPos = recipeHeight/2 - minecraft.fontRenderer.FONT_HEIGHT;
-        RenderUtils.drawTextAlignedMiddle(Utils.localize(card.getUnlocalizedName()), xPos, yPos, Color.gray.getRGB());
+        int xPos = CropRecipeCategory.ITEM_X+20;
+        int yPos = CropRecipeCategory.ITEM_Y+4;
+        RenderUtils.drawTextAlignedLeft(Utils.localize(card.getUnlocalizedName()), xPos, yPos, Color.gray.getRGB());
+        for (int i = 0, chancesSize = chances.size(); i < chancesSize; i++) {
+            Integer chance = chances.get(i);
+            if(chance!=100)
+                RenderUtils.drawTextAlignedMiddle(String.format("%d%%",chance),
+                        CropRecipeCategory.ITEM_X +9+i*18,CropRecipeCategory.LINE2_Y-9,Color.gray.getRGB());
+        }
+
     }
 
     public String getPowerUnit(){
