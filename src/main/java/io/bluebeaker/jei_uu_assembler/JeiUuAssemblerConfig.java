@@ -24,4 +24,7 @@ public class JeiUuAssemblerConfig {
     public static boolean steam_turbine = true;
     @Config.RequiresMcRestart
     public static boolean fermenter = true;
+    @Config.RequiresMcRestart
+    public static boolean crops = true;
+    public static int cropDropSamples = 1000;
 }

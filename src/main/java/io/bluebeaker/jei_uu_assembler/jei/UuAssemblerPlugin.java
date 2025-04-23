@@ -53,8 +53,8 @@ public class UuAssemblerPlugin implements IModPlugin {
     if(JeiUuAssemblerConfig.mass_fabricator)
       registry.addRecipeCategories(new MassFabRecipeCategory(guiHelper));
 
-
-    registry.addRecipeCategories(new CropRecipeCategory(guiHelper));
+    if(JeiUuAssemblerConfig.crops)
+      registry.addRecipeCategories(new CropRecipeCategory(guiHelper));
   }
 
   @Override
@@ -102,13 +102,15 @@ public class UuAssemblerPlugin implements IModPlugin {
       registry.addRecipes(FermenterCategory.getRecipes(jeiHelpers), FermenterCategory.UID);
       registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.fermenter), FermenterCategory.UID);
     }
-    if(JeiUuAssemblerConfig.mass_fabricator){
+    if(JeiUuAssemblerConfig.mass_fabricator) {
       registry.addRecipes(MassFabRecipeCategory.getRecipes(jeiHelpers), MassFabRecipeCategory.UID);
       registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.mass_fabricator), MassFabRecipeCategory.UID);
     }
 
-    registry.addRecipes(CropRecipeCategory.getRecipes(jeiHelpers),CropRecipeCategory.UID);
-    registry.addRecipeCatalyst(ItemName.crop_stick.getItemStack(), CropRecipeCategory.UID);
+    if(JeiUuAssemblerConfig.crops){
+      registry.addRecipes(CropRecipeCategory.getRecipes(jeiHelpers),CropRecipeCategory.UID);
+      registry.addRecipeCatalyst(ItemName.crop_stick.getItemStack(), CropRecipeCategory.UID);
+    }
     JeiUuAssemblerMod.logInfo("Loaded all recipes!");
   }
 

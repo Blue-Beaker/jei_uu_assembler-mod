@@ -11,6 +11,7 @@ import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 
+import javax.annotation.Nullable;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +22,10 @@ public class CropRecipeWrapper implements IRecipeWrapper {
     protected final ItemStack inputStack;
     protected final CropCard card;
     protected final List<ItemStack> outputs = new ArrayList<>();
-    protected List<Integer> chances;
+    protected List<Float> chances;
 
-    public CropRecipeWrapper(IJeiHelpers jeiHelpers, CropCard card, ItemStack input, List<ItemStack> outputs, List<Integer> chances) {
+
+    public CropRecipeWrapper(IJeiHelpers jeiHelpers, CropCard card, ItemStack input, List<ItemStack> outputs, @Nullable List<Float> chances) {
         this.jeiHelpers = jeiHelpers;
         this.inputStack = input;
         this.card=card;
@@ -42,11 +44,13 @@ public class CropRecipeWrapper implements IRecipeWrapper {
         int xPos = CropRecipeCategory.ITEM_X+20;
         int yPos = CropRecipeCategory.ITEM_Y+4;
         RenderUtils.drawTextAlignedLeft(Utils.localize(card.getUnlocalizedName()), xPos, yPos, Color.gray.getRGB());
-        for (int i = 0, chancesSize = chances.size(); i < chancesSize; i++) {
-            Integer chance = chances.get(i);
-            if(chance!=100)
-                RenderUtils.drawTextAlignedMiddle(String.format("%d%%",chance),
-                        CropRecipeCategory.ITEM_X +9+i*18,CropRecipeCategory.LINE2_Y-9,Color.gray.getRGB());
+        if(chances!=null){
+            for (int i = 0, chancesSize = chances.size(); i < chancesSize; i++) {
+                Float chance = chances.get(i);
+                if(chance!=1.0F)
+                    RenderUtils.drawTextAlignedMiddle(String.format("%.0f%%",chance*100),
+                            CropRecipeCategory.ITEM_X +9+i*18,CropRecipeCategory.LINE2_Y-9,Color.gray.getRGB());
+            }
         }
 
     }
