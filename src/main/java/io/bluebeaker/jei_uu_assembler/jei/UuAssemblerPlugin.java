@@ -7,6 +7,7 @@ import ic2.core.ref.TeBlock;
 import ic2.jeiIntegration.transferhandlers.TransferHandlerBatchCrafter;
 import io.bluebeaker.jei_uu_assembler.JeiUuAssemblerConfig;
 import io.bluebeaker.jei_uu_assembler.JeiUuAssemblerMod;
+import io.bluebeaker.jei_uu_assembler.jei.crop.CropRecipeCategory;
 import io.bluebeaker.jei_uu_assembler.jei.generator.FluidHeaterCategory;
 import io.bluebeaker.jei_uu_assembler.jei.generator.GeoGeneratorCategory;
 import io.bluebeaker.jei_uu_assembler.jei.generator.SemiFluidGeneratorCategory;
@@ -51,6 +52,9 @@ public class UuAssemblerPlugin implements IModPlugin {
       registry.addRecipeCategories(new FermenterCategory(guiHelper));
     if(JeiUuAssemblerConfig.mass_fabricator)
       registry.addRecipeCategories(new MassFabRecipeCategory(guiHelper));
+
+
+    registry.addRecipeCategories(new CropRecipeCategory(guiHelper));
   }
 
   @Override
@@ -102,6 +106,9 @@ public class UuAssemblerPlugin implements IModPlugin {
       registry.addRecipes(MassFabRecipeCategory.getRecipes(jeiHelpers), MassFabRecipeCategory.UID);
       registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.mass_fabricator), MassFabRecipeCategory.UID);
     }
+
+    registry.addRecipes(CropRecipeCategory.getRecipes(jeiHelpers),CropRecipeCategory.UID);
+    registry.addRecipeCatalyst(ItemName.crop_stick.getItemStack(), CropRecipeCategory.UID);
     JeiUuAssemblerMod.logInfo("Loaded all recipes!");
   }
 

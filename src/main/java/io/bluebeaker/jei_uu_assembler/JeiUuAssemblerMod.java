@@ -33,6 +33,9 @@ public class JeiUuAssemblerMod
     public static void logInfo(String info){
         logger.info(info);
     }
+    public static Logger getLogger(){
+        return logger;
+    }
 
     @SubscribeEvent
     public void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
