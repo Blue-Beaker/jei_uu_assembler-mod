@@ -1,14 +1,15 @@
 package io.bluebeaker.jei_uu_assembler.jei.crop;
 
+import ic2.api.crops.BaseSeed;
 import ic2.api.crops.CropCard;
 import ic2.api.crops.Crops;
-import ic2.core.crop.IC2Crops;
 import ic2.core.crop.cropcard.CropRedWheat;
 import ic2.core.item.ItemCropSeed;
 import ic2.core.ref.ItemName;
 import io.bluebeaker.jei_uu_assembler.JeiUuAssemblerConfig;
 import io.bluebeaker.jei_uu_assembler.JeiUuAssemblerMod;
 import io.bluebeaker.jei_uu_assembler.jei.generic.GenericRecipeCategory;
+import io.bluebeaker.jei_uu_assembler.mixin.AccessorIC2Crops;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.gui.IGuiItemStackGroup;
@@ -48,12 +49,17 @@ public class CropRecipeCategory extends GenericRecipeCategory<CropRecipeWrapper>
     public void setRecipe(IRecipeLayout recipeLayout, CropRecipeWrapper wrapper, IIngredients iIngredients) {
         IGuiItemStackGroup guiItemStackGroup = recipeLayout.getItemStacks();
         this.addItemSlot(guiItemStackGroup,0,ITEM_X, ITEM_Y);
-        guiItemStackGroup.set(0, wrapper.inputStack);
+        guiItemStackGroup.set(0, wrapper.seedBag);
+        // If there is a seed for the crop, add it
+        if(wrapper.seedStack!=null){
+            this.addItemSlot(guiItemStackGroup,1,WIDTH-ITEM_X-18, ITEM_Y);
+            guiItemStackGroup.set(1, wrapper.seedStack);
+        }
         List<ItemStack> outputs = wrapper.outputs;
         for (int i = 0, outputsSize = outputs.size(); i < outputsSize; i++) {
             ItemStack output = outputs.get(i);
-            this.addItemSlot(guiItemStackGroup,i+1, ITEM_X +i*18, LINE2_Y);
-            guiItemStackGroup.set(i+1, output);
+            this.addItemSlot(guiItemStackGroup,i+2, ITEM_X +i*18, LINE2_Y);
+            guiItemStackGroup.set(i+2, output);
         }
 
     }
@@ -61,8 +67,11 @@ public class CropRecipeCategory extends GenericRecipeCategory<CropRecipeWrapper>
     public static List<CropRecipeWrapper> getRecipes(IJeiHelpers jeiHelpers) {
         List<CropRecipeWrapper> recipes = new ArrayList<>();
         long time = System.currentTimeMillis();
+        Map<CropCard, ItemStack> seedMap = getSeedMap();
+
         for (CropCard crop : Crops.instance.getCrops()) {
             try {
+                // Special case for red wheat
                 if(crop instanceof CropRedWheat){
                     List<ItemStack> output = new ArrayList<>();
                     output.add(new ItemStack(Items.REDSTONE));
@@ -70,7 +79,7 @@ public class CropRecipeCategory extends GenericRecipeCategory<CropRecipeWrapper>
                     recipes.add(new CropRecipeWrapper(jeiHelpers, crop, ItemCropSeed.generateItemStackFromValues(crop,0,0,0,3),output, null));
                     continue;
                 }
-
+                // Use dummy crop tile to simulate drops
                 DummyCropTile dummyCropTile = new DummyCropTile(crop);
                 dummyCropTile.setCurrentSize(crop.getOptimalHarvestSize(dummyCropTile));
                 Map<ItemStack, Float> outputCounter = simulateHarvest(dummyCropTile);
@@ -82,8 +91,24 @@ public class CropRecipeCategory extends GenericRecipeCategory<CropRecipeWrapper>
                     output.add(stack1);
                     chances.add(entry.getValue());
                 }
+                // Add seed if there is one
+                ItemStack seedStack = seedMap.get(crop);
+                ItemStack seedBag;
 
-                recipes.add(new CropRecipeWrapper(jeiHelpers, crop, ItemCropSeed.generateItemStackFromValues(crop,0,0,0,3),output,chances));
+                if(seedStack!=null){
+                    BaseSeed baseSeed = Crops.instance.getBaseSeed(seedStack);
+                    seedBag = ItemCropSeed.generateItemStackFromValues(crop, baseSeed.statGrowth, baseSeed.statGain, baseSeed.statResistance, 4);
+                }else {
+                    seedBag = ItemCropSeed.generateItemStackFromValues(crop, 0, 0, 0, 3);
+                }
+
+                CropRecipeWrapper recipe = new CropRecipeWrapper(jeiHelpers, crop, seedBag, output, chances);
+
+                if(seedStack!=null){
+                   recipe.setSeedStack(seedStack.copy());
+                }
+
+                recipes.add(recipe);
             } catch (Exception e) {
                 JeiUuAssemblerMod.getLogger().error("Error when getting seed recipes:",e);
             }
@@ -91,6 +116,14 @@ public class CropRecipeCategory extends GenericRecipeCategory<CropRecipeWrapper>
 
         JeiUuAssemblerMod.getLogger().info("Crop harvest simulation took {}ms", System.currentTimeMillis() - time);
         return recipes;
+    }
+    public static Map<CropCard, ItemStack> getSeedMap(){
+        Map<CropCard,ItemStack> map = new HashMap<>();
+        Map<ItemStack, BaseSeed> baseSeeds = ((AccessorIC2Crops) Crops.instance).getBaseSeeds();
+        for (Map.Entry<ItemStack, BaseSeed> entry : baseSeeds.entrySet()) {
+            map.put(entry.getValue().crop, entry.getKey());
+        }
+        return map;
     }
 
     private static Map<ItemStack, Float> simulateHarvest(DummyCropTile dummyCropTile) {

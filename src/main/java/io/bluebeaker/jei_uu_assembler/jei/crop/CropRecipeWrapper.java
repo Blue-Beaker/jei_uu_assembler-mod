@@ -19,15 +19,15 @@ import java.util.List;
 public class CropRecipeWrapper implements IRecipeWrapper {
 
     protected final IJeiHelpers jeiHelpers;
-    protected final ItemStack inputStack;
+    protected final ItemStack seedBag;
     protected final CropCard card;
+    protected ItemStack seedStack;
     protected final List<ItemStack> outputs = new ArrayList<>();
     protected List<Float> chances;
 
-
     public CropRecipeWrapper(IJeiHelpers jeiHelpers, CropCard card, ItemStack input, List<ItemStack> outputs, @Nullable List<Float> chances) {
         this.jeiHelpers = jeiHelpers;
-        this.inputStack = input;
+        this.seedBag = input;
         this.card=card;
         this.chances=chances;
         this.outputs.addAll(outputs);
@@ -35,7 +35,15 @@ public class CropRecipeWrapper implements IRecipeWrapper {
 
     @Override
     public void getIngredients(IIngredients iIngredients) {
-        iIngredients.setInput(VanillaTypes.ITEM, inputStack);
+        if(seedStack==null){
+            iIngredients.setInput(VanillaTypes.ITEM, seedBag);
+        }else {
+            ArrayList<ItemStack> inputs = new ArrayList<>();
+            inputs.add(seedBag);
+            inputs.add(seedStack);
+            iIngredients.setInputs(VanillaTypes.ITEM,inputs);
+        }
+        iIngredients.setInput(VanillaTypes.ITEM, seedStack);
         iIngredients.setOutputs(VanillaTypes.ITEM,outputs);
     }
 
@@ -57,5 +65,13 @@ public class CropRecipeWrapper implements IRecipeWrapper {
 
     public String getPowerUnit(){
         return EnergyUnit.HU.name;
+    }
+
+    public ItemStack getSeedStack() {
+        return seedStack;
+    }
+
+    public void setSeedStack(ItemStack seedStack) {
+        this.seedStack = seedStack;
     }
 }

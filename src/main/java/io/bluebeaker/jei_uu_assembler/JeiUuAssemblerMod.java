@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
 
-@Mod(modid = JeiUuAssemblerMod.MODID, name = JeiUuAssemblerMod.NAME, version = JeiUuAssemblerMod.VERSION)
+@Mod(modid = JeiUuAssemblerMod.MODID, name = JeiUuAssemblerMod.NAME, version = JeiUuAssemblerMod.VERSION, acceptableRemoteVersions = "*")
 public class JeiUuAssemblerMod
 {
     public static final String MODID = Tags.MOD_ID;

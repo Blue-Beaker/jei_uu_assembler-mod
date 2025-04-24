@@ -6,8 +6,9 @@
   "minVersion": "0.8.5",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "AccessorUuRecipe",
-    "AccessorTileEntityMassFabricator"
+    "AccessorIC2Crops",
+    "AccessorTileEntityMassFabricator",
+    "AccessorUuRecipe"
   ],
   "server": [],
   "client": []
