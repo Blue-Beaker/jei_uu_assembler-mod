@@ -25,11 +25,12 @@ public class CropRecipeCategory extends GenericRecipeCategory<CropRecipeWrapper>
     public static final String UID = "jei_uu_assembler.crop";;
     public static final ItemStack uu = ItemName.crop_stick.getItemStack();
 
-    private static final int WIDTH = 116;
-    private static final int HEIGHT = 54;
-    public static final int ITEM_X = 8;
-    public static final int ITEM_Y = 1;
-    public static final int LINE2_Y = 34;
+    private static final int WIDTH = 160;
+    private static final int HEIGHT = 60;
+    public static final int ITEM1_X = WIDTH/2-9;
+    public static final int ITEM2_X = WIDTH/2;
+    public static final int ITEM1_Y = 11;
+    public static final int ITEM2_Y = HEIGHT-20;
 
     public CropRecipeCategory(IGuiHelper guiHelper) {
         super(guiHelper,WIDTH,HEIGHT);
@@ -48,17 +49,18 @@ public class CropRecipeCategory extends GenericRecipeCategory<CropRecipeWrapper>
     @Override
     public void setRecipe(IRecipeLayout recipeLayout, CropRecipeWrapper wrapper, IIngredients iIngredients) {
         IGuiItemStackGroup guiItemStackGroup = recipeLayout.getItemStacks();
-        this.addItemSlot(guiItemStackGroup,0,ITEM_X, ITEM_Y);
+        this.addItemSlot(guiItemStackGroup,0, ITEM1_X, ITEM1_Y);
         guiItemStackGroup.set(0, wrapper.seedBag);
         // If there is a seed for the crop, add it
         if(wrapper.seedStack!=null){
-            this.addItemSlot(guiItemStackGroup,1,WIDTH-ITEM_X-18, ITEM_Y);
+            this.addItemSlot(guiItemStackGroup,1,ITEM1_X-18, ITEM1_Y);
             guiItemStackGroup.set(1, wrapper.seedStack);
         }
         List<ItemStack> outputs = wrapper.outputs;
+
         for (int i = 0, outputsSize = outputs.size(); i < outputsSize; i++) {
             ItemStack output = outputs.get(i);
-            this.addItemSlot(guiItemStackGroup,i+2, ITEM_X +i*18, LINE2_Y);
+            this.addItemSlot(guiItemStackGroup,i+2, ITEM2_X-outputsSize*9+i*18, ITEM2_Y);
             guiItemStackGroup.set(i+2, output);
         }
 

@@ -12,9 +12,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nullable;
-import java.awt.*;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+
+import static io.bluebeaker.jei_uu_assembler.jei.crop.CropRecipeCategory.ITEM2_X;
+import static io.bluebeaker.jei_uu_assembler.jei.crop.CropRecipeCategory.ITEM2_Y;
 
 public class CropRecipeWrapper implements IRecipeWrapper {
 
@@ -49,15 +52,18 @@ public class CropRecipeWrapper implements IRecipeWrapper {
 
     @Override
     public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
-        int xPos = CropRecipeCategory.ITEM_X+20;
-        int yPos = CropRecipeCategory.ITEM_Y+4;
-        RenderUtils.drawTextAlignedLeft(Utils.localize(card.getUnlocalizedName()), xPos, yPos, Color.gray.getRGB());
+        int xPos = recipeWidth/2;
+        int yPos = 1;
+        RenderUtils.drawTextAlignedMiddle(
+                RenderUtils.cutStringToWidth(
+                        Utils.localize(card.getUnlocalizedName()),
+                        recipeWidth), xPos, yPos, Color.gray.getRGB());
         if(chances!=null){
             for (int i = 0, chancesSize = chances.size(); i < chancesSize; i++) {
                 Float chance = chances.get(i);
                 if(chance!=1.0F)
                     RenderUtils.drawTextAlignedMiddle(String.format("%.0f%%",chance*100),
-                            CropRecipeCategory.ITEM_X +9+i*18,CropRecipeCategory.LINE2_Y-9,Color.gray.getRGB());
+                            ITEM2_X +9-outputs.size()*9+i*18, ITEM2_Y -9,Color.gray.getRGB());
             }
         }
 
