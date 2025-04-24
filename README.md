@@ -14,6 +14,7 @@ Now also shows recipes for:
 - Steam boiler  
 - Steam turbine  
 - Fermenter  
+- Crop harvest
 
 Dependends on:  
 IC2 Experimental  
