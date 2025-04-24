@@ -10,6 +10,7 @@ import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nullable;
 import java.awt.Color;
@@ -46,7 +47,9 @@ public class CropRecipeWrapper implements IRecipeWrapper {
             inputs.add(seedStack);
             iIngredients.setInputs(VanillaTypes.ITEM,inputs);
         }
-        iIngredients.setOutputs(VanillaTypes.ITEM,outputs);
+        List<ItemStack> outputList = new ArrayList<>(outputs);
+        outputList.add(seedBag);
+        iIngredients.setOutputs(VanillaTypes.ITEM,outputList);
     }
 
     @Override
@@ -76,7 +79,7 @@ public class CropRecipeWrapper implements IRecipeWrapper {
         return seedStack;
     }
 
-    public void setSeedStack(ItemStack seedStack) {
-        this.seedStack = seedStack;
+    public void setSeedStack(ItemStack newStack) {
+        this.seedStack = newStack.copy();
     }
 }

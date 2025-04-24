@@ -107,7 +107,7 @@ public class CropRecipeCategory extends GenericRecipeCategory<CropRecipeWrapper>
                 CropRecipeWrapper recipe = new CropRecipeWrapper(jeiHelpers, crop, seedBag, output, chances);
 
                 if(seedStack!=null){
-                   recipe.setSeedStack(seedStack.copy());
+                   recipe.setSeedStack(seedStack);
                 }
 
                 recipes.add(recipe);
