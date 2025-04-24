@@ -46,7 +46,6 @@ public class CropRecipeWrapper implements IRecipeWrapper {
             inputs.add(seedStack);
             iIngredients.setInputs(VanillaTypes.ITEM,inputs);
         }
-        iIngredients.setInput(VanillaTypes.ITEM, seedStack);
         iIngredients.setOutputs(VanillaTypes.ITEM,outputs);
     }
 

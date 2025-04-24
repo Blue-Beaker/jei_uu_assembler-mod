@@ -26,5 +26,6 @@ public class JeiUuAssemblerConfig {
     public static boolean fermenter = true;
     @Config.RequiresMcRestart
     public static boolean crops = true;
+    @Config.RangeInt(min = 1)
     public static int cropDropSamples = 1000;
 }

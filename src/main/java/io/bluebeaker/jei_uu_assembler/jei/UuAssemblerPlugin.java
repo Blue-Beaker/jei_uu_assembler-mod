@@ -1,5 +1,6 @@
 package io.bluebeaker.jei_uu_assembler.jei;
 
+import ic2.core.item.ItemCropSeed;
 import ic2.core.item.type.CraftingItemType;
 import ic2.core.ref.BlockName;
 import ic2.core.ref.ItemName;
@@ -8,6 +9,7 @@ import ic2.jeiIntegration.transferhandlers.TransferHandlerBatchCrafter;
 import io.bluebeaker.jei_uu_assembler.JeiUuAssemblerConfig;
 import io.bluebeaker.jei_uu_assembler.JeiUuAssemblerMod;
 import io.bluebeaker.jei_uu_assembler.jei.crop.CropRecipeCategory;
+import io.bluebeaker.jei_uu_assembler.jei.crop.CropSubtypeInterpreter;
 import io.bluebeaker.jei_uu_assembler.jei.generator.FluidHeaterCategory;
 import io.bluebeaker.jei_uu_assembler.jei.generator.GeoGeneratorCategory;
 import io.bluebeaker.jei_uu_assembler.jei.generator.SemiFluidGeneratorCategory;
@@ -128,6 +130,14 @@ public class UuAssemblerPlugin implements IModPlugin {
   }
 
   public static void showCraftingRecipes() {
+  }
+
+  @Override
+  public void registerSubtypes(ISubtypeRegistry subtypeRegistry) {
+    if(JeiUuAssemblerConfig.crops) {
+      subtypeRegistry.registerSubtypeInterpreter(ItemName.crop_seed_bag.getInstance(), new CropSubtypeInterpreter());
+    }
+    IModPlugin.super.registerSubtypes(subtypeRegistry);
   }
 
   @Override

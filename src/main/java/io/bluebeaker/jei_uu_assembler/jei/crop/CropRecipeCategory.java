@@ -53,7 +53,7 @@ public class CropRecipeCategory extends GenericRecipeCategory<CropRecipeWrapper>
         guiItemStackGroup.set(0, wrapper.seedBag);
         // If there is a seed for the crop, add it
         if(wrapper.seedStack!=null){
-            this.addItemSlot(guiItemStackGroup,1,ITEM1_X-18, ITEM1_Y);
+            this.addItemSlot(guiItemStackGroup,1,ITEM1_X-36, ITEM1_Y);
             guiItemStackGroup.set(1, wrapper.seedStack);
         }
         List<ItemStack> outputs = wrapper.outputs;
