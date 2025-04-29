@@ -11,6 +11,7 @@ public class CropSubtypeInterpreter implements ISubtypeRegistry.ISubtypeInterpre
             return "";
         } else {
             NBTTagCompound tagCompound = itemStack.getTagCompound();
+            if(tagCompound.getByte("scan")==0) return "unknown";
             return tagCompound.getString("owner")+":"+tagCompound.getString("id");
         }
     }
