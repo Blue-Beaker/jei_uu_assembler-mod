@@ -5,4 +5,4 @@ Now shows recipes for more machines
 ## 1.2.0
 Added crop harvest category  
 ## 1.2.1
-For crop subtype, report unscanned seedbag as "unknown"  
+Report unscanned seedbag as "unknown" subtype  
