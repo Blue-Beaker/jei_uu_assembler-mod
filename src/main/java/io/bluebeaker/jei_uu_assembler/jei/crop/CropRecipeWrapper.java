@@ -28,13 +28,17 @@ public class CropRecipeWrapper implements IRecipeWrapper {
     protected ItemStack seedStack;
     protected final List<ItemStack> outputs = new ArrayList<>();
     protected List<Float> chances;
+    protected final int harvestSize;
+    protected final int growthPoints;
 
-    public CropRecipeWrapper(IJeiHelpers jeiHelpers, CropCard card, ItemStack input, List<ItemStack> outputs, @Nullable List<Float> chances) {
+    public CropRecipeWrapper(IJeiHelpers jeiHelpers, CropCard card, ItemStack input, List<ItemStack> outputs, @Nullable List<Float> chances, int harvestSize, int growthPoints) {
         this.jeiHelpers = jeiHelpers;
         this.seedBag = input;
         this.card=card;
         this.chances=chances;
         this.outputs.addAll(outputs);
+        this.harvestSize=harvestSize;
+        this.growthPoints=growthPoints;
     }
 
     @Override
@@ -68,7 +72,12 @@ public class CropRecipeWrapper implements IRecipeWrapper {
                             ITEM2_X +9-outputs.size()*9+i*18, ITEM2_Y -9,Color.gray.getRGB());
             }
         }
-
+        RenderUtils.drawTextAlignedRight(
+                Utils.localize("gui.jei_uu_assembler.category.crop.text.harvest_size",this.harvestSize),recipeWidth,11,Color.gray.getRGB()
+        );
+        RenderUtils.drawTextAlignedRight(
+                Utils.localize("gui.jei_uu_assembler.category.crop.text.growth_points",this.growthPoints),recipeWidth,21,Color.gray.getRGB()
+        );
     }
 
     public String getPowerUnit(){

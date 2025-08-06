@@ -1,3 +1,5 @@
 gui.jei_uu_assembler.category.liquid_heatup=Liquid Heatup
 gui.jei_uu_assembler.category.liquid_cooldown=Liquid Cooldown
 gui.jei_uu_assembler.category.crop=Crop
+gui.jei_uu_assembler.category.crop.text.harvest_size=Crop size: %s
+gui.jei_uu_assembler.category.crop.text.growth_points=Points: %s
