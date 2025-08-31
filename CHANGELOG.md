@@ -12,3 +12,7 @@ Report unscanned seedbag as "unknown" subtype
 
 ## 1.2.2
 Add harvest size and growth points info to crop category  
+
+## 1.2.3
+Added workaround for Eating Plant crop  
+Added drop chances for Red Wheat crop  
