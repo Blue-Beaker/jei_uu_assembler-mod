@@ -3,3 +3,4 @@ gui.jei_uu_assembler.category.liquid_cooldown=流体冷却
 gui.jei_uu_assembler.category.crop=作物架
 gui.jei_uu_assembler.category.crop.text.harvest_size=收获阶段: %s
 gui.jei_uu_assembler.category.crop.text.growth_points=生长点数: %s
+gui.jei_uu_assembler.category.crop.text.condition_redstone=当输入红石信号: %s

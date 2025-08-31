@@ -1,16 +1,15 @@
 package io.bluebeaker.jei_uu_assembler.jei.crop;
 
 import ic2.api.crops.CropCard;
-import io.bluebeaker.jei_uu_assembler.utils.EnergyUnit;
 import io.bluebeaker.jei_uu_assembler.utils.RenderUtils;
 import io.bluebeaker.jei_uu_assembler.utils.Utils;
 import mezz.jei.api.IJeiHelpers;
+import mezz.jei.api.gui.ITooltipCallback;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nullable;
 import java.awt.Color;
@@ -30,6 +29,7 @@ public class CropRecipeWrapper implements IRecipeWrapper {
     protected List<Float> chances;
     protected final int harvestSize;
     protected final int growthPoints;
+    protected ITooltipCallback<ItemStack> tooltipCallback = null;
 
     public CropRecipeWrapper(IJeiHelpers jeiHelpers, CropCard card, ItemStack input, List<ItemStack> outputs, @Nullable List<Float> chances, int harvestSize, int growthPoints) {
         this.jeiHelpers = jeiHelpers;
@@ -80,15 +80,19 @@ public class CropRecipeWrapper implements IRecipeWrapper {
         );
     }
 
-    public String getPowerUnit(){
-        return EnergyUnit.HU.name;
-    }
-
     public ItemStack getSeedStack() {
         return seedStack;
     }
 
     public void setSeedStack(ItemStack newStack) {
         this.seedStack = newStack.copy();
+    }
+
+    public ITooltipCallback<ItemStack> getTooltipCallback() {
+        return tooltipCallback;
+    }
+
+    public void setTooltipCallback(ITooltipCallback<ItemStack> tooltipCallback) {
+        this.tooltipCallback = tooltipCallback;
     }
 }

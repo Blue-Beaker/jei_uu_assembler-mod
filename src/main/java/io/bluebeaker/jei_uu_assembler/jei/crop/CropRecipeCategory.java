@@ -16,7 +16,7 @@ import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
-import net.minecraft.init.Items;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 
 import java.util.*;
@@ -65,6 +65,9 @@ public class CropRecipeCategory extends GenericRecipeCategory<CropRecipeWrapper>
             guiItemStackGroup.set(i+2, output);
         }
 
+        if(wrapper.getTooltipCallback() !=null){
+            guiItemStackGroup.addTooltipCallback(wrapper.getTooltipCallback());
+        }
     }
 
     public static List<CropRecipeWrapper> getRecipes(IJeiHelpers jeiHelpers) {
@@ -85,7 +88,7 @@ public class CropRecipeCategory extends GenericRecipeCategory<CropRecipeWrapper>
                     if(i>=crop.getSizeAfterHarvest(dummyCropTile)){
                         //Special case for Eating Plant
                         if(crop instanceof CropEating){
-                            growthPoints+=Workarounds.getGrowthDuration(crop);
+                            growthPoints+=Workarounds.eatingPlantGrowthDuration(crop);
                             continue;
                         }
                         growthPoints+=crop.getGrowthDuration(dummyCropTile);
@@ -105,9 +108,7 @@ public class CropRecipeCategory extends GenericRecipeCategory<CropRecipeWrapper>
 
         // Special case for red wheat
         if(crop instanceof CropRedWheat){
-            outputCounter = new HashMap<>();
-            outputCounter.put(new ItemStack(Items.REDSTONE),1.0f);
-            outputCounter.put(new ItemStack(Items.WHEAT),1.0f);
+            outputCounter = Workarounds.redWheatHarvest();
         }else{
             outputCounter = simulateHarvest(dummyCropTile);
         }
@@ -132,6 +133,15 @@ public class CropRecipeCategory extends GenericRecipeCategory<CropRecipeWrapper>
         }
 
         CropRecipeWrapper recipe = new CropRecipeWrapper(jeiHelpers, crop, seedBag, output, chances, dummyCropTile.getCurrentSize(),growthPoints);
+
+        if(crop instanceof CropRedWheat){
+            StringTooltipCallback callback = new StringTooltipCallback();
+
+            callback.addTooltipToIndex(2, new String[]{I18n.format("gui.jei_uu_assembler.category.crop.text.condition_redstone","100%")});
+            callback.addTooltipToIndex(3, new String[]{I18n.format("gui.jei_uu_assembler.category.crop.text.condition_redstone","0%")});
+
+            recipe.setTooltipCallback(callback);
+        }
 
         if(seedStack!=null){
            recipe.setSeedStack(seedStack);
