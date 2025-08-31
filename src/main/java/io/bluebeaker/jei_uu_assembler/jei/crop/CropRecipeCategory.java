@@ -3,6 +3,7 @@ package io.bluebeaker.jei_uu_assembler.jei.crop;
 import ic2.api.crops.BaseSeed;
 import ic2.api.crops.CropCard;
 import ic2.api.crops.Crops;
+import ic2.core.crop.cropcard.CropEating;
 import ic2.core.crop.cropcard.CropRedWheat;
 import ic2.core.item.ItemCropSeed;
 import ic2.core.ref.ItemName;
@@ -82,6 +83,11 @@ public class CropRecipeCategory extends GenericRecipeCategory<CropRecipeWrapper>
                         addRecipeForCrop(jeiHelpers, crop, dummyCropTile, seedMap, recipes,growthPoints);
                     }
                     if(i>=crop.getSizeAfterHarvest(dummyCropTile)){
+                        //Special case for Eating Plant
+                        if(crop instanceof CropEating){
+                            growthPoints+=Workarounds.getGrowthDuration(crop);
+                            continue;
+                        }
                         growthPoints+=crop.getGrowthDuration(dummyCropTile);
                     }
                 }
