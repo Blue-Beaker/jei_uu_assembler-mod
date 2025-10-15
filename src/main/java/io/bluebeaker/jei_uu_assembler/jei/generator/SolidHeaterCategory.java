@@ -49,7 +49,7 @@ public class SolidHeaterCategory extends GenericRecipeCategory<SolidHeaterCatego
 
     @Override
     public String getTranslationKey() {
-        return Utils.getTranslationKeyFromTeBlock(TeBlock.generator);
+        return Utils.getTranslationKeyFromTeBlock(TeBlock.solid_heat_generator);
     }
 
     @Override

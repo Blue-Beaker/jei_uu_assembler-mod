@@ -20,7 +20,6 @@ public abstract class GenericRecipeCategory<T extends IRecipeWrapper> implements
 
     private final IDrawable background;
     private final IDrawable slotBackground;
-    private final String localizedName;
     private final FluidStackRenderer fluidStackRenderer = new FluidStackRenderer(1,false,16,16,null);
     public final int GUI_WIDTH;
     public final int GUI_HEIGHT;
@@ -33,7 +32,6 @@ public abstract class GenericRecipeCategory<T extends IRecipeWrapper> implements
     public GenericRecipeCategory(IGuiHelper guiHelper, int width, int height) {
         this.background = guiHelper.createBlankDrawable(width, height);
         this.slotBackground = guiHelper.getSlotDrawable();
-        this.localizedName = Translator.translateToLocal(this.getTranslationKey());
         this.GUI_WIDTH = width;
         this.GUI_HEIGHT = height;
     }
@@ -48,7 +46,7 @@ public abstract class GenericRecipeCategory<T extends IRecipeWrapper> implements
 
     @Override
     public String getTitle() {
-        return this.localizedName;
+        return Translator.translateToLocal(this.getTranslationKey());
     }
 
     @Override
