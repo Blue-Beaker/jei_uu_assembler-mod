@@ -1,7 +1,6 @@
 package io.bluebeaker.jei_uu_assembler.jei;
 
 import ic2.core.block.heatgenerator.gui.GuiFluidHeatGenerator;
-import ic2.core.block.kineticgenerator.gui.GuiStirlingKineticGenerator;
 import ic2.core.block.machine.gui.GuiFermenter;
 import ic2.core.item.type.CraftingItemType;
 import ic2.core.ref.BlockName;
@@ -18,7 +17,6 @@ import io.bluebeaker.jei_uu_assembler.jei.massfab.MassFabRecipeCategory;
 import io.bluebeaker.jei_uu_assembler.jei.uu.UURecipeCategory;
 import io.bluebeaker.jei_uu_assembler.jei.uu.UURecipeMaker;
 import io.bluebeaker.jei_uu_assembler.utils.IC2Utils;
-import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import mezz.jei.api.*;
 import mezz.jei.api.ingredients.IModIngredientRegistration;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
@@ -26,6 +24,7 @@ import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
 import java.util.List;
+import java.util.Map;
 
 
 @JEIPlugin
@@ -80,7 +79,7 @@ public class UuAssemblerPlugin implements IModPlugin {
       registry.getRecipeTransferRegistry().addRecipeTransferHandler(new TransferHandlerBatchCrafter(), UURecipeCategory.UID);
     }
     if(JeiUuAssemblerConfig.generator || JeiUuAssemblerConfig.solid_heater){
-      Int2ObjectMap<List<ItemStack>> fuels = IC2Utils.getFuelValuesGenerator(registry);
+      List<Map.Entry<Integer, List<ItemStack>>> fuels = IC2Utils.getFuelsSorted(registry);
       if(JeiUuAssemblerConfig.generator){
         registry.addRecipes(GeneratorCategory.getRecipes(fuels),GeneratorCategory.UID);
         registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.generator), GeneratorCategory.UID);

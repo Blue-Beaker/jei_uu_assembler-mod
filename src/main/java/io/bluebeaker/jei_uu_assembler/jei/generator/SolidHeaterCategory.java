@@ -1,22 +1,15 @@
 package io.bluebeaker.jei_uu_assembler.jei.generator;
 
 import ic2.core.block.heatgenerator.tileentity.TileEntitySolidHeatGenerator;
-import ic2.core.init.MainConfig;
 import ic2.core.item.type.MiscResourceType;
 import ic2.core.ref.BlockName;
 import ic2.core.ref.ItemName;
 import ic2.core.ref.TeBlock;
-import ic2.core.util.ConfigUtil;
 import io.bluebeaker.jei_uu_assembler.jei.generic.FuelRecipeWrapper;
-import io.bluebeaker.jei_uu_assembler.jei.generic.GenericRecipeCategory;
 import io.bluebeaker.jei_uu_assembler.utils.EnergyUnit;
-import io.bluebeaker.jei_uu_assembler.utils.IC2Drawables;
 import io.bluebeaker.jei_uu_assembler.utils.RenderUtils;
 import io.bluebeaker.jei_uu_assembler.utils.Utils;
-import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import mezz.jei.api.IGuiHelper;
-import mezz.jei.api.gui.IDrawableAnimated;
-import mezz.jei.api.gui.IDrawableStatic;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
@@ -26,18 +19,14 @@ import net.minecraft.item.ItemStack;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
-public class SolidHeaterCategory extends GenericRecipeCategory<SolidHeaterCategory.Wrapper> {
+public class SolidHeaterCategory extends BaseSolidGeneratorCategory<SolidHeaterCategory.Wrapper> {
     public static final String UID = "jei_uu_assembler.solid_heater";
-    protected final IDrawableStatic bgHeatBar;
-    protected final IDrawableAnimated heatBar;
 
     public SolidHeaterCategory(IGuiHelper guiHelper) {
         super(guiHelper,116,32);
-        this.bgHeatBar = guiHelper.createDrawable(IC2Drawables.GUI_PATH, 97, 80, 14, 14);
-        this.heatBar = guiHelper.drawableBuilder(IC2Drawables.GUI_PATH, 112, 80, 14, 14).buildAnimated(200, IDrawableAnimated.StartDirection.TOP, true);
         this.icon = guiHelper.createDrawableIngredient(BlockName.te.getItemStack(TeBlock.solid_heat_generator));
     }
 
@@ -66,10 +55,11 @@ public class SolidHeaterCategory extends GenericRecipeCategory<SolidHeaterCatego
         return UID;
     }
 
-    public static List<Wrapper> getRecipes(Int2ObjectMap<List<ItemStack>> fuels){
-        List<Wrapper> recipes = new ArrayList<>(fuels.size());
-
-        fuels.int2ObjectEntrySet().stream().sorted(Comparator.comparingInt(Int2ObjectMap.Entry::getIntKey)).forEach((entry) -> recipes.add(new Wrapper(entry.getValue(), entry.getIntKey())));
+    public static List<Wrapper> getRecipes(List<Map.Entry<Integer,List<ItemStack>>> fuels){
+        List<Wrapper> recipes = new ArrayList<>();
+        for (Map.Entry<Integer, List<ItemStack>> fuel : fuels) {
+            recipes.add(new Wrapper(fuel.getValue(),fuel.getKey()));
+        }
         return recipes;
     }
 
