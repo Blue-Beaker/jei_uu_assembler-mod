@@ -3,7 +3,6 @@ package io.bluebeaker.jei_uu_assembler.jei.crop;
 import ic2.api.crops.CropCard;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 
 import java.util.HashMap;
 import java.util.Map;

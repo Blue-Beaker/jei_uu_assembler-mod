@@ -6,9 +6,7 @@ import ic2.api.crops.Crops;
 import ic2.core.crop.cropcard.CropEating;
 import ic2.core.crop.cropcard.CropRedWheat;
 import ic2.core.item.ItemCropSeed;
-import ic2.core.ref.BlockName;
 import ic2.core.ref.ItemName;
-import ic2.core.ref.TeBlock;
 import io.bluebeaker.jei_uu_assembler.JeiUuAssemblerConfig;
 import io.bluebeaker.jei_uu_assembler.JeiUuAssemblerMod;
 import io.bluebeaker.jei_uu_assembler.jei.generic.GenericRecipeCategory;
@@ -25,8 +23,7 @@ import java.util.*;
 
 public class CropRecipeCategory extends GenericRecipeCategory<CropRecipeWrapper> {
 
-    public static final String UID = "jei_uu_assembler.crop";;
-    public static final ItemStack uu = ItemName.crop_stick.getItemStack();
+    public static final String UID = "jei_uu_assembler.crop";
 
     private static final int WIDTH = 160;
     private static final int HEIGHT = 60;

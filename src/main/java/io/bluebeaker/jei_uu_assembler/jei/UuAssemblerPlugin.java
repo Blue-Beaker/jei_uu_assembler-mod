@@ -22,7 +22,6 @@ import mezz.jei.api.ingredients.IModIngredientRegistration;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import net.minecraft.item.ItemStack;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Map;
 
@@ -140,17 +139,6 @@ public class UuAssemblerPlugin implements IModPlugin {
   @Override
   public void onRuntimeAvailable(IJeiRuntime jeiRuntimeIn) {
     UuAssemblerPlugin.jeiRuntime = jeiRuntimeIn;
-  }
-
-  public static void setFilterText(@Nonnull String filterText) {
-    jeiRuntime.getIngredientFilter().setFilterText(filterText);
-  }
-
-  public static String getFilterText() {
-    return jeiRuntime.getIngredientFilter().getFilterText();
-  }
-
-  public static void showCraftingRecipes() {
   }
 
   @Override
