@@ -9,8 +9,12 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
+import mezz.jei.gui.elements.DrawableIngredient;
 import mezz.jei.plugins.vanilla.ingredients.fluid.FluidStackRenderer;
 import mezz.jei.util.Translator;
+import net.minecraft.item.ItemStack;
+
+import javax.annotation.Nullable;
 
 public abstract class GenericRecipeCategory<T extends IRecipeWrapper> implements IRecipeCategory<T> {
 
@@ -20,6 +24,7 @@ public abstract class GenericRecipeCategory<T extends IRecipeWrapper> implements
     private final FluidStackRenderer fluidStackRenderer = new FluidStackRenderer(1,false,16,16,null);
     public final int GUI_WIDTH;
     public final int GUI_HEIGHT;
+    public IDrawable icon = null;
 
     public GenericRecipeCategory(IGuiHelper guiHelper) {
         this(guiHelper,116,54);
@@ -31,6 +36,12 @@ public abstract class GenericRecipeCategory<T extends IRecipeWrapper> implements
         this.localizedName = Translator.translateToLocal(this.getTranslationKey());
         this.GUI_WIDTH = width;
         this.GUI_HEIGHT = height;
+    }
+
+    @Nullable
+    @Override
+    public IDrawable getIcon() {
+        return icon;
     }
 
     public abstract String getTranslationKey();

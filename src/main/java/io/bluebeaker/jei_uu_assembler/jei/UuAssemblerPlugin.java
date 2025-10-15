@@ -1,6 +1,5 @@
 package io.bluebeaker.jei_uu_assembler.jei;
 
-import ic2.core.item.ItemCropSeed;
 import ic2.core.item.type.CraftingItemType;
 import ic2.core.ref.BlockName;
 import ic2.core.ref.ItemName;
@@ -10,18 +9,20 @@ import io.bluebeaker.jei_uu_assembler.JeiUuAssemblerConfig;
 import io.bluebeaker.jei_uu_assembler.JeiUuAssemblerMod;
 import io.bluebeaker.jei_uu_assembler.jei.crop.CropRecipeCategory;
 import io.bluebeaker.jei_uu_assembler.jei.crop.CropSubtypeInterpreter;
-import io.bluebeaker.jei_uu_assembler.jei.generator.FluidHeaterCategory;
-import io.bluebeaker.jei_uu_assembler.jei.generator.GeoGeneratorCategory;
-import io.bluebeaker.jei_uu_assembler.jei.generator.SemiFluidGeneratorCategory;
+import io.bluebeaker.jei_uu_assembler.jei.generator.*;
 import io.bluebeaker.jei_uu_assembler.jei.liquid_heat.*;
 import io.bluebeaker.jei_uu_assembler.jei.massfab.MassFabRecipeCategory;
 import io.bluebeaker.jei_uu_assembler.jei.uu.UURecipeCategory;
 import io.bluebeaker.jei_uu_assembler.jei.uu.UURecipeMaker;
+import io.bluebeaker.jei_uu_assembler.utils.IC2Utils;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import mezz.jei.api.*;
 import mezz.jei.api.ingredients.IModIngredientRegistration;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
+import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 
 
 @JEIPlugin
@@ -57,6 +58,11 @@ public class UuAssemblerPlugin implements IModPlugin {
 
     if(JeiUuAssemblerConfig.crops)
       registry.addRecipeCategories(new CropRecipeCategory(guiHelper));
+
+    if(JeiUuAssemblerConfig.generator)
+      registry.addRecipeCategories(new GeneratorCategory(guiHelper));
+    if(JeiUuAssemblerConfig.solid_heater)
+      registry.addRecipeCategories(new SolidHeaterCategory(guiHelper));
   }
 
   @Override
@@ -112,6 +118,17 @@ public class UuAssemblerPlugin implements IModPlugin {
     if(JeiUuAssemblerConfig.crops){
       registry.addRecipes(CropRecipeCategory.getRecipes(jeiHelpers),CropRecipeCategory.UID);
       registry.addRecipeCatalyst(ItemName.crop_stick.getItemStack(), CropRecipeCategory.UID);
+    }
+    if(JeiUuAssemblerConfig.generator || JeiUuAssemblerConfig.solid_heater){
+      Int2ObjectMap<List<ItemStack>> fuels = IC2Utils.getFuelValuesGenerator(registry);
+      if(JeiUuAssemblerConfig.generator){
+        registry.addRecipes(GeneratorCategory.getRecipes(fuels),GeneratorCategory.UID);
+        registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.generator), GeneratorCategory.UID);
+      }
+      if(JeiUuAssemblerConfig.solid_heater){
+        registry.addRecipes(SolidHeaterCategory.getRecipes(fuels),SolidHeaterCategory.UID);
+        registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.solid_heat_generator), SolidHeaterCategory.UID);
+      }
     }
     JeiUuAssemblerMod.logInfo("Loaded all recipes!");
   }

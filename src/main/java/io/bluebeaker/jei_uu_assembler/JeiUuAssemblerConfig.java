@@ -9,9 +9,13 @@ public class JeiUuAssemblerConfig {
     @Config.RequiresMcRestart
     public static boolean mass_fabricator = true;
     @Config.RequiresMcRestart
+    public static boolean generator = true;
+    @Config.RequiresMcRestart
     public static boolean geo_generator = true;
     @Config.RequiresMcRestart
     public static boolean semifluid_generator = true;
+    @Config.RequiresMcRestart
+    public static boolean solid_heater = true;
     @Config.RequiresMcRestart
     public static boolean fluid_heater = true;
     @Config.RequiresMcRestart
