@@ -37,6 +37,11 @@ public class UuAssemblerPlugin implements IModPlugin {
     IGuiHelper guiHelper = jeiHelpers.getGuiHelper();
     if(JeiUuAssemblerConfig.uu_assembler)
       registry.addRecipeCategories(new UURecipeCategory(guiHelper));
+
+    if(JeiUuAssemblerConfig.generator)
+      registry.addRecipeCategories(new GeneratorCategory(guiHelper));
+    if(JeiUuAssemblerConfig.solid_heater)
+      registry.addRecipeCategories(new SolidHeaterCategory(guiHelper));
     if(JeiUuAssemblerConfig.geo_generator)
       registry.addRecipeCategories(new GeoGeneratorCategory(guiHelper));
     if(JeiUuAssemblerConfig.semifluid_generator)
@@ -58,11 +63,6 @@ public class UuAssemblerPlugin implements IModPlugin {
 
     if(JeiUuAssemblerConfig.crops)
       registry.addRecipeCategories(new CropRecipeCategory(guiHelper));
-
-    if(JeiUuAssemblerConfig.generator)
-      registry.addRecipeCategories(new GeneratorCategory(guiHelper));
-    if(JeiUuAssemblerConfig.solid_heater)
-      registry.addRecipeCategories(new SolidHeaterCategory(guiHelper));
   }
 
   @Override
@@ -75,6 +75,17 @@ public class UuAssemblerPlugin implements IModPlugin {
       registry.addRecipes(UURecipeMaker.getUuRecipe(), UURecipeCategory.UID);
       registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.uu_assembly_bench), UURecipeCategory.UID);
       registry.getRecipeTransferRegistry().addRecipeTransferHandler(new TransferHandlerBatchCrafter(), UURecipeCategory.UID);
+    }
+    if(JeiUuAssemblerConfig.generator || JeiUuAssemblerConfig.solid_heater){
+      Int2ObjectMap<List<ItemStack>> fuels = IC2Utils.getFuelValuesGenerator(registry);
+      if(JeiUuAssemblerConfig.generator){
+        registry.addRecipes(GeneratorCategory.getRecipes(fuels),GeneratorCategory.UID);
+        registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.generator), GeneratorCategory.UID);
+      }
+      if(JeiUuAssemblerConfig.solid_heater){
+        registry.addRecipes(SolidHeaterCategory.getRecipes(fuels),SolidHeaterCategory.UID);
+        registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.solid_heat_generator), SolidHeaterCategory.UID);
+      }
     }
     if (JeiUuAssemblerConfig.geo_generator) {
       registry.addRecipes(GeoGeneratorCategory.getRecipes(jeiHelpers),GeoGeneratorCategory.UID);
@@ -118,17 +129,6 @@ public class UuAssemblerPlugin implements IModPlugin {
     if(JeiUuAssemblerConfig.crops){
       registry.addRecipes(CropRecipeCategory.getRecipes(jeiHelpers),CropRecipeCategory.UID);
       registry.addRecipeCatalyst(ItemName.crop_stick.getItemStack(), CropRecipeCategory.UID);
-    }
-    if(JeiUuAssemblerConfig.generator || JeiUuAssemblerConfig.solid_heater){
-      Int2ObjectMap<List<ItemStack>> fuels = IC2Utils.getFuelValuesGenerator(registry);
-      if(JeiUuAssemblerConfig.generator){
-        registry.addRecipes(GeneratorCategory.getRecipes(fuels),GeneratorCategory.UID);
-        registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.generator), GeneratorCategory.UID);
-      }
-      if(JeiUuAssemblerConfig.solid_heater){
-        registry.addRecipes(SolidHeaterCategory.getRecipes(fuels),SolidHeaterCategory.UID);
-        registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.solid_heat_generator), SolidHeaterCategory.UID);
-      }
     }
     JeiUuAssemblerMod.logInfo("Loaded all recipes!");
   }
