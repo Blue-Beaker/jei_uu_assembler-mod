@@ -1,5 +1,8 @@
 package io.bluebeaker.jei_uu_assembler.jei;
 
+import ic2.core.block.heatgenerator.gui.GuiFluidHeatGenerator;
+import ic2.core.block.kineticgenerator.gui.GuiStirlingKineticGenerator;
+import ic2.core.block.machine.gui.GuiFermenter;
 import ic2.core.item.type.CraftingItemType;
 import ic2.core.ref.BlockName;
 import ic2.core.ref.ItemName;
@@ -98,6 +101,7 @@ public class UuAssemblerPlugin implements IModPlugin {
     if (JeiUuAssemblerConfig.fluid_heater) {
       registry.addRecipes(FluidHeaterCategory.getRecipes(jeiHelpers),FluidHeaterCategory.UID);
       registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.fluid_heat_generator), FluidHeaterCategory.UID);
+      registry.addRecipeClickArea(GuiFluidHeatGenerator.class,32,28,25,15,FluidHeaterCategory.UID);
     }
     if (JeiUuAssemblerConfig.stirling_kinetic_generator) {
       registry.addRecipes(LiquidHeatUp.getRecipes(jeiHelpers), LiquidHeatUp.UID);
@@ -120,6 +124,7 @@ public class UuAssemblerPlugin implements IModPlugin {
     if(JeiUuAssemblerConfig.fermenter){
       registry.addRecipes(FermenterCategory.getRecipes(jeiHelpers), FermenterCategory.UID);
       registry.addRecipeCatalyst(BlockName.te.getItemStack(TeBlock.fermenter), FermenterCategory.UID);
+      registry.addRecipeClickArea(GuiFermenter.class,83,25,38,20,FermenterCategory.UID);
     }
     if(JeiUuAssemblerConfig.mass_fabricator) {
       registry.addRecipes(MassFabRecipeCategory.getRecipes(jeiHelpers), MassFabRecipeCategory.UID);

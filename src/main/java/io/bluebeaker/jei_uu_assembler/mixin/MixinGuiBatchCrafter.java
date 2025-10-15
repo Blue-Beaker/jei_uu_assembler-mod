@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(GuiBatchCrafter.class)
+@Mixin(value = GuiBatchCrafter.class,remap = false)
 public abstract class MixinGuiBatchCrafter extends GuiIC2<ContainerBatchCrafter> {
     public MixinGuiBatchCrafter(ContainerBatchCrafter container) {
         super(container);
