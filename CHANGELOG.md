@@ -16,3 +16,7 @@ Add harvest size and growth points info to crop category
 ## 1.2.3
 Added workaround for Eating Plant crop  
 Added drop chances for Red Wheat crop  
+
+## 1.2.4
+Added recipe categories for generator and solid fuel firebox  
+Added click area for UU assembly bench, fluid heater, and fermenter  
