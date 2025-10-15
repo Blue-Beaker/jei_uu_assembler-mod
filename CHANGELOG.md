@@ -20,3 +20,4 @@ Added drop chances for Red Wheat crop
 ## 1.2.4
 Added recipe categories for generator and solid fuel firebox  
 Added click area for UU assembly bench, fluid heater, and fermenter  
+Added calcification hint for steam boiler recipe category  

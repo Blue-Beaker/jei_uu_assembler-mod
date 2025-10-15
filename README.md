@@ -15,6 +15,8 @@ Now also shows recipes for:
 - Steam turbine  
 - Fermenter  
 - Crop harvest
+- Generator
+- Solid fuel firebox
 
 Dependends on:  
 IC2 Experimental  
