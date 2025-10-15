@@ -15,11 +15,13 @@ import mezz.jei.api.gui.IGuiFluidStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.I18n;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SteamBoilerCategory extends GenericRecipeCategory<FluidHeatConversionRecipe> {
@@ -82,6 +84,14 @@ public class SteamBoilerCategory extends GenericRecipeCategory<FluidHeatConversi
             this.temp = temp;
             this.pressure = pressure;
             this.calcify = calcify;
+        }
+
+        @Override
+        public List<String> getTooltipStrings(int mouseX, int mouseY) {
+            if(this.calcify && mouseX>=34 && mouseY>=22 && mouseX<=34+48 && mouseY<=22+10){
+                return Collections.singletonList(I18n.format("gui.jei_uu_assembler.category.steam_boiler.text.calcify",String.format("%.3f",(float)inputStack.amount/100000*100)));
+            }
+            return super.getTooltipStrings(mouseX, mouseY);
         }
 
         @Override
