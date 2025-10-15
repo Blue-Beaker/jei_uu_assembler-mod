@@ -11,5 +11,7 @@
     "AccessorUuRecipe"
   ],
   "server": [],
-  "client": []
+  "client": [
+    "MixinGuiBatchCrafter"
+  ]
 }
