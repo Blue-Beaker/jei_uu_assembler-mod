@@ -37,9 +37,9 @@ public abstract class FuelRecipeWrapper implements IRecipeWrapper {
         int xPos = recipeWidth / 2;
         int yPos = recipeHeight / 2 - minecraft.fontRenderer.FONT_HEIGHT;
 
-        RenderUtils.drawTextAlignedMiddle(this.duration*this.power+this.getPowerUnit(), xPos, yPos, Color.gray.getRGB());
+        RenderUtils.drawTextAlignedMiddle(this.power +this.getPowerUnit()+ "/t", xPos, yPos, Color.gray.getRGB());
         yPos += minecraft.fontRenderer.FONT_HEIGHT + 2;
-        RenderUtils.drawTextAlignedMiddle(this.duration + "ticks", xPos, yPos, Color.gray.getRGB());
+        RenderUtils.drawTextAlignedMiddle(this.duration*this.power+this.getPowerUnit(), xPos, yPos, Color.gray.getRGB());
     }
     public String getPowerUnit() {
         return EnergyUnit.EU.name;
