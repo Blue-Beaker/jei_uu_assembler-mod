@@ -2,6 +2,7 @@ package io.bluebeaker.jei_uu_assembler.jei.generator;
 
 import ic2.api.recipe.ISemiFluidFuelManager;
 import ic2.api.recipe.Recipes;
+import ic2.core.ref.BlockName;
 import ic2.core.ref.TeBlock;
 import io.bluebeaker.jei_uu_assembler.utils.EnergyUnit;
 import io.bluebeaker.jei_uu_assembler.utils.Utils;
@@ -17,6 +18,7 @@ public class SemiFluidGeneratorCategory extends FluidPowerRecipeCategory {
     public static final EnergyUnit ENERGY_UNIT = EnergyUnit.EU;
     public SemiFluidGeneratorCategory(IGuiHelper guiHelper) {
         super(guiHelper);
+        this.icon = guiHelper.createDrawableIngredient(BlockName.te.getItemStack(TeBlock.semifluid_generator));
     }
 
     @Override

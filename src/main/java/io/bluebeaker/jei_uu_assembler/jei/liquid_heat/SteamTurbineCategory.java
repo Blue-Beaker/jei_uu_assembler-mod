@@ -2,6 +2,7 @@ package io.bluebeaker.jei_uu_assembler.jei.liquid_heat;
 
 import ic2.core.init.MainConfig;
 import ic2.core.item.type.CraftingItemType;
+import ic2.core.ref.BlockName;
 import ic2.core.ref.FluidName;
 import ic2.core.ref.ItemName;
 import ic2.core.ref.TeBlock;
@@ -34,6 +35,7 @@ public class SteamTurbineCategory extends GenericRecipeCategory<FluidHeatConvers
         super(guiHelper,116,38);
         this.bgArrow = guiHelper.createDrawable(Constants.GUI_0, 0, 17, 48, 10);
         this.arrow = guiHelper.drawableBuilder(Constants.GUI_0, 48, 17, 48, 10).buildAnimated(200, IDrawableAnimated.StartDirection.LEFT, false);
+        this.icon = guiHelper.createDrawableIngredient(BlockName.te.getItemStack(TeBlock.steam_kinetic_generator));
     }
 
     @Override
@@ -56,7 +58,7 @@ public class SteamTurbineCategory extends GenericRecipeCategory<FluidHeatConvers
 
     @Override
     public String getTranslationKey() {
-        return Utils.getTranslationKeyFromTeBlock(TeBlock.steam_generator);
+        return Utils.getTranslationKeyFromTeBlock(TeBlock.steam_kinetic_generator);
     }
 
     @Override

@@ -5,6 +5,7 @@ import ic2.api.recipe.MachineRecipe;
 import ic2.api.recipe.Recipes;
 import ic2.core.init.MainConfig;
 import ic2.core.item.type.MiscResourceType;
+import ic2.core.ref.BlockName;
 import ic2.core.ref.ItemName;
 import ic2.core.ref.TeBlock;
 import ic2.core.util.ConfigUtil;
@@ -38,6 +39,7 @@ public class MassFabRecipeCategory extends GenericRecipeCategory<MassFabRecipeCa
 
     public MassFabRecipeCategory(IGuiHelper guiHelper) {
         super(guiHelper,WIDTH,HEIGHT);
+        this.icon = guiHelper.createDrawableIngredient(BlockName.te.getItemStack(TeBlock.mass_fabricator));
     }
 
     @Override

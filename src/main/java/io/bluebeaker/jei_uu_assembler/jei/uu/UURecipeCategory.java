@@ -3,6 +3,7 @@ package io.bluebeaker.jei_uu_assembler.jei.uu;
 import java.util.List;
 
 import ic2.core.block.TeBlockRegistry;
+import ic2.core.ref.BlockName;
 import ic2.core.ref.TeBlock;
 import io.bluebeaker.jei_uu_assembler.JeiUuAssemblerMod;
 import io.bluebeaker.jei_uu_assembler.utils.Utils;
@@ -19,6 +20,8 @@ import mezz.jei.config.Constants;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
+import javax.annotation.Nullable;
+
 public class UURecipeCategory implements IRecipeCategory<IRecipeWrapper> {
     static IJeiHelpers jeiHelpers;
 	private static final int craftOutputSlot = 0;
@@ -31,12 +34,20 @@ public class UURecipeCategory implements IRecipeCategory<IRecipeWrapper> {
 	private final IDrawable background;
 	private final String localizedName;
 	private final ICraftingGridHelper craftingGridHelper;
+	private final IDrawable icon;
 
-    public UURecipeCategory(IGuiHelper guiHelper) {
+	@Nullable
+	@Override
+	public IDrawable getIcon() {
+		return this.icon;
+	}
+
+	public UURecipeCategory(IGuiHelper guiHelper) {
 		ResourceLocation location = Constants.RECIPE_GUI_VANILLA;
 		background = guiHelper.createDrawable(location, 0, 60, width, height);
 		localizedName = Utils.localize(TeBlockRegistry.get(TeBlock.uu_assembly_bench.getIdentifier()).getItemStack(TeBlock.uu_assembly_bench).getTranslationKey());
 		craftingGridHelper = guiHelper.createCraftingGridHelper(craftInputSlot1, craftOutputSlot);
+		this.icon = guiHelper.createDrawableIngredient(BlockName.te.getItemStack(TeBlock.uu_assembly_bench));
     }
 
     @Override

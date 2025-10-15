@@ -2,6 +2,7 @@ package io.bluebeaker.jei_uu_assembler.jei.generator;
 
 import ic2.api.recipe.IFluidHeatManager;
 import ic2.api.recipe.Recipes;
+import ic2.core.ref.BlockName;
 import ic2.core.ref.TeBlock;
 import io.bluebeaker.jei_uu_assembler.utils.Utils;
 import mezz.jei.api.IGuiHelper;
@@ -16,6 +17,7 @@ public class FluidHeaterCategory extends FluidPowerRecipeCategory {
 
     public FluidHeaterCategory(IGuiHelper guiHelper) {
         super(guiHelper);
+        this.icon = guiHelper.createDrawableIngredient(BlockName.te.getItemStack(TeBlock.fluid_heat_generator));
     }
 
     @Override

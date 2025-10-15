@@ -1,6 +1,7 @@
 package io.bluebeaker.jei_uu_assembler.jei.generator;
 
 import ic2.core.init.MainConfig;
+import ic2.core.ref.BlockName;
 import ic2.core.ref.TeBlock;
 import ic2.core.util.ConfigUtil;
 import io.bluebeaker.jei_uu_assembler.utils.EnergyUnit;
@@ -18,6 +19,7 @@ public class GeoGeneratorCategory extends FluidPowerRecipeCategory {
     public static final EnergyUnit ENERGY_UNIT = EnergyUnit.EU;
     public GeoGeneratorCategory(IGuiHelper guiHelper) {
         super(guiHelper);
+        this.icon = guiHelper.createDrawableIngredient(BlockName.te.getItemStack(TeBlock.geo_generator));
     }
 
     @Override

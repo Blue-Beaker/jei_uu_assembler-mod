@@ -4,6 +4,7 @@ import ic2.api.recipe.IFermenterRecipeManager;
 import ic2.api.recipe.Recipes;
 import ic2.core.init.MainConfig;
 import ic2.core.item.type.CropResItemType;
+import ic2.core.ref.BlockName;
 import ic2.core.ref.ItemName;
 import ic2.core.ref.TeBlock;
 import ic2.core.util.ConfigUtil;
@@ -42,6 +43,7 @@ public class FermenterCategory extends GenericRecipeCategory<FluidHeatConversion
         super(guiHelper,WIDTH,HEIGHT);
         this.bgArrow = guiHelper.createDrawable(Constants.GUI_0, 0, 17, 48, 10);
         this.bgArrow2 = guiHelper.createDrawable(Constants.GUI_0, 0, 27, 48, 4);
+        this.icon = guiHelper.createDrawableIngredient(BlockName.te.getItemStack(TeBlock.fermenter));
     }
 
     @Override

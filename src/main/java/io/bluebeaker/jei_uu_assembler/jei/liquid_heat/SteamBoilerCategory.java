@@ -1,5 +1,6 @@
 package io.bluebeaker.jei_uu_assembler.jei.liquid_heat;
 
+import ic2.core.ref.BlockName;
 import ic2.core.ref.FluidName;
 import ic2.core.ref.TeBlock;
 import io.bluebeaker.jei_uu_assembler.Constants;
@@ -31,6 +32,7 @@ public class SteamBoilerCategory extends GenericRecipeCategory<FluidHeatConversi
         super(guiHelper,116,38);
         this.bgArrow = guiHelper.createDrawable(Constants.GUI_0, 0, 17, 48, 10);
         this.arrow = guiHelper.drawableBuilder(Constants.GUI_0, 48, 17, 48, 10).buildAnimated(200, IDrawableAnimated.StartDirection.LEFT, false);
+        this.icon = guiHelper.createDrawableIngredient(BlockName.te.getItemStack(TeBlock.steam_generator));
     }
 
     @Override

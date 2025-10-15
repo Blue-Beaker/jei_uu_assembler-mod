@@ -1,6 +1,7 @@
 package io.bluebeaker.jei_uu_assembler.jei.generator;
 
 import ic2.core.init.MainConfig;
+import ic2.core.ref.BlockName;
 import ic2.core.ref.TeBlock;
 import ic2.core.util.ConfigUtil;
 import io.bluebeaker.jei_uu_assembler.utils.IC2Drawables;
@@ -32,6 +33,7 @@ public class GeneratorCategory extends GenericRecipeCategory<GeneratorCategory.W
         super(guiHelper,116,32);
         this.bgHeatBar = guiHelper.createDrawable(IC2Drawables.GUI_PATH, 97, 80, 14, 14);
         this.heatBar = guiHelper.drawableBuilder(IC2Drawables.GUI_PATH, 112, 80, 14, 14).buildAnimated(200, IDrawableAnimated.StartDirection.TOP, true);
+        this.icon = guiHelper.createDrawableIngredient(BlockName.te.getItemStack(TeBlock.generator));
     }
 
     @Override

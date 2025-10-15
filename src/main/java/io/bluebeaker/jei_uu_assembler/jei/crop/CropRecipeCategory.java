@@ -6,7 +6,9 @@ import ic2.api.crops.Crops;
 import ic2.core.crop.cropcard.CropEating;
 import ic2.core.crop.cropcard.CropRedWheat;
 import ic2.core.item.ItemCropSeed;
+import ic2.core.ref.BlockName;
 import ic2.core.ref.ItemName;
+import ic2.core.ref.TeBlock;
 import io.bluebeaker.jei_uu_assembler.JeiUuAssemblerConfig;
 import io.bluebeaker.jei_uu_assembler.JeiUuAssemblerMod;
 import io.bluebeaker.jei_uu_assembler.jei.generic.GenericRecipeCategory;
@@ -35,6 +37,7 @@ public class CropRecipeCategory extends GenericRecipeCategory<CropRecipeWrapper>
 
     public CropRecipeCategory(IGuiHelper guiHelper) {
         super(guiHelper,WIDTH,HEIGHT);
+        this.icon = guiHelper.createDrawableIngredient(ItemName.crop_seed_bag.getItemStack());
     }
 
     @Override
